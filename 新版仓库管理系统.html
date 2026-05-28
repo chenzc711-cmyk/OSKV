@@ -459,7 +459,7 @@ function renderInventory() {
       <td><span class="stock-cell"><b>${product.stock}</b><span class="stock-bar"><span style="width:${Math.min(100, product.stock * 2)}%"></span></span></span></td>
       <td class="money">${money(productAmount(product))}</td>
       <td><span class="badge ${product.stock <= product.warning ? "low" : "ok"}">${product.stock <= product.warning ? "库存不足" : "库存正常"}</span></td>
-      <td><button class="link-btn" data-adjust="${product.id}">✎ 调整</button><button class="link-btn" data-detail="${product.id}">详情</button></td>
+      <td><button class="link-btn" data-adjust="${product.id}">✎需补货 调整</button><button class="link-btn" data-detail="${product.id}">详情</button></td>
     </tr>`).join("");
 }
 
