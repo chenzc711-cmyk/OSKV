@@ -1,0 +1,143 @@
+<!doctype html>
+<html lang="zh-CN">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>仓库管理</title>
+    <link rel="stylesheet" href="styles.css" />
+  </head>
+  <body>
+    <div class="app-shell">
+      <aside class="sidebar" aria-label="仓库管理导航">
+        <div class="brand">
+          <span class="brand-icon" aria-hidden="true">▣</span>
+          <strong>仓库管理</strong>
+        </div>
+        <nav class="nav-list">
+          <button class="nav-item active" data-view="dashboard" type="button">⌘ <span>仪表盘</span></button>
+          <button class="nav-item" data-view="inventory" type="button">⌕ <span>库存查询</span></button>
+          <button class="nav-item" data-view="stockIn" type="button">↙ <span>入库登记</span></button>
+          <button class="nav-item" data-view="stockOut" type="button">↗ <span>出库登记</span></button>
+          <button class="nav-item" data-view="costs" type="button">$ <span>成本登记</span></button>
+          <button class="nav-item" data-view="products" type="button">◈ <span>商品管理</span></button>
+          <button class="nav-item" data-view="reports" type="button">▥ <span>报表统计</span></button>
+        </nav>
+        <button class="logout" type="button">⇥ 退出系统</button>
+      </aside>
+
+      <main class="workspace">
+        <section class="view active" id="view-dashboard">
+          <div class="page-head">
+            <h1>仪表盘</h1>
+            <span class="updated">数据更新时间：<span id="updatedAt"></span></span>
+          </div>
+          <div class="metric-grid four">
+            <article class="metric-card"><div><span>商品总数</span><strong id="dashProductCount">0</strong></div><i class="icon blue">▱</i></article>
+            <article class="metric-card"><div><span>总库存</span><strong id="dashStockTotal">0</strong></div><i class="icon green">↗</i></article>
+            <article class="metric-card"><div><span>库存总额</span><strong id="dashInventoryValue">¥0.00</strong></div><i class="icon purple">$</i></article>
+            <article class="metric-card"><div><span>库存预警</span><strong class="danger-text" id="dashWarningCount">0</strong></div><i class="icon red">⚠</i></article>
+          </div>
+          <div class="summary-row">
+            <article class="panel half"><h2>今日出入库</h2><div class="soft-grid"><div class="soft-card in"><span>↙ 今日入库</span><strong id="todayInQty">0</strong><small>金额：<b id="todayInAmount">¥0.00</b></small></div><div class="soft-card out"><span>↗ 今日出库</span><strong id="todayOutQty">0</strong><small>金额：<b id="todayOutAmount">¥0.00</b></small></div></div></article>
+            <article class="panel half"><h2>本月累计出入库</h2><div class="soft-grid"><div class="soft-card month-in"><span>↙ 本月入库</span><strong id="monthInQty">0</strong><small>金额：<b id="monthInAmount">¥0.00</b></small></div><div class="soft-card month-out"><span>↗ 本月出库</span><strong id="monthOutQty">0</strong><small>金额：<b id="monthOutAmount">¥0.00</b></small></div></div></article>
+          </div>
+          <div class="chart-grid">
+            <article class="panel"><h2>库存价值 TOP5 商品</h2><div id="valueTopChart" class="bar-chart"></div></article>
+            <article class="panel"><h2>出库数量 TOP5 商品</h2><div id="outQtyTopChart" class="empty-chart">暂无数据</div></article>
+            <article class="panel"><h2>出库金额 TOP5 商品</h2><div id="outAmountTopChart" class="empty-chart">暂无数据</div></article>
+          </div>
+        </section>
+
+        <section class="view" id="view-inventory">
+          <div class="page-head"><h1>库存查询</h1><button class="btn light" id="exportInventoryBtn" type="button">⇩ 导出Excel</button></div>
+          <div class="metric-grid four compact">
+            <article class="mini-metric"><i class="bubble blue">◈</i><div><span>商品总数</span><strong id="invProductCount">0</strong></div></article>
+            <article class="mini-metric"><i class="bubble green">↗</i><div><span>总库存量</span><strong id="invStockTotal">0</strong></div></article>
+            <article class="mini-metric"><i class="bubble blue">$</i><div><span>在库金额</span><strong id="invAmount">¥0.00</strong></div></article>
+            <article class="mini-metric"><i class="bubble red">⚠</i><div><span>库存不足</span><strong id="invWarningCount">0</strong></div></article>
+          </div>
+          <div class="warning-box" id="warningBox"><strong>⚠ 库存预警</strong><div id="warningTags"></div></div>
+          <div class="filter-card"><input id="inventorySearch" type="search" placeholder="搜索商品名称、编码或分类..." /><div class="tabs"><button class="tab active" data-filter="all" type="button">全部 (<span id="tabAll">0</span>)</button><button class="tab" data-filter="normal" type="button">库存正常 (<span id="tabNormal">0</span>)</button><button class="tab" data-filter="low" type="button">库存不足 (<span id="tabLow">0</span>)</button></div></div>
+          <div class="table-card"><table><thead><tr><th>商品名称</th><th>分类</th><th>单位</th><th>单价</th><th>当前库存</th><th>库存金额</th><th>库存状态</th><th>操作</th></tr></thead><tbody id="inventoryBody"></tbody></table></div>
+        </section>
+
+        <section class="view" id="view-stockIn">
+          <div class="page-head"><h1>入库登记</h1><div class="actions"><button class="btn light" id="importStockInBtn" type="button">↥ 批量导入</button><button class="btn light" id="exportStockInBtn" type="button">⇩ 导出 Excel</button><button class="btn primary" id="addStockInBtn" type="button">＋ 添加入库</button></div></div>
+          <div class="metric-grid three"><article class="metric-card small"><span>入库记录数</span><strong id="inRecordCount">0</strong></article><article class="metric-card small"><span>总入库数量</span><strong class="blue-text" id="inQtyTotal">0</strong></article><article class="metric-card small"><span>总金额</span><strong class="green-text" id="inAmountTotal">¥0.00</strong></article></div>
+          <div class="filter-card"><input id="stockInSearch" type="search" placeholder="搜索批次号或商品名称..." /><div class="date-row"><span>▣</span><input id="stockInStart" type="date" /><span>至</span><input id="stockInEnd" type="date" /></div></div>
+          <div class="table-card"><table><thead><tr><th><input type="checkbox" /></th><th>批次号</th><th>商品</th><th>供应商</th><th>数量</th><th>单价</th><th>总金额</th><th>入库日期</th><th>操作员</th><th>操作</th></tr></thead><tbody id="stockInBody"></tbody></table></div>
+        </section>
+
+        <section class="view" id="view-stockOut">
+          <div class="page-head"><h1>出库登记</h1><div class="actions"><button class="btn light" id="importStockOutBtn" type="button">↥ 批量导入</button><button class="btn light" id="exportStockOutBtn" type="button">⇩ 导出Excel</button><button class="btn primary" id="addStockOutBtn" type="button">＋ 添加出库</button></div></div>
+          <div class="metric-grid two"><article class="metric-card small"><span>出库记录数</span><strong id="outRecordCount">0</strong></article><article class="metric-card small"><span>总出库数量</span><strong class="red-text" id="outQtyTotal">0</strong></article></div>
+          <div class="filter-card"><input id="stockOutSearch" type="search" placeholder="搜索商品名称..." /><div class="date-row"><span>▣</span><input id="stockOutStart" type="date" /><span>至</span><input id="stockOutEnd" type="date" /></div></div>
+          <div class="table-card"><table><thead><tr><th><input type="checkbox" /></th><th>出库日期</th><th>商品</th><th>数量</th><th>用途</th><th>操作</th></tr></thead><tbody id="stockOutBody"></tbody></table></div>
+        </section>
+
+        <section class="view" id="view-costs">
+          <div class="page-head"><h1>成本登记</h1><div class="actions"><button class="btn light" id="exportCostsBtn" type="button">⇩ 导出Excel</button><button class="btn primary" id="addCostBtn" type="button">＋ 添加成本</button></div></div>
+          <div class="metric-grid four"><article class="metric-card small"><span>总成本</span><strong class="red-text" id="costTotal">¥0.00</strong></article><article class="metric-card small"><span>采购成本</span><strong id="purchaseCost">¥0.00</strong></article><article class="metric-card small"><span>快递成本</span><strong id="expressCost">¥0.00</strong></article><article class="metric-card small"><span>代发成本</span><strong id="agencyCost">¥0.00</strong></article><article class="metric-card small"><span>其他成本</span><strong id="otherCost">¥0.00</strong></article></div>
+          <div class="filter-card"><select id="costTypeFilter"><option value="all">全部成本类型</option><option value="采购成本">采购成本</option><option value="快递成本">快递成本</option><option value="代发成本">代发成本</option><option value="其他成本">其他成本</option></select></div>
+          <div class="table-card"><table><thead><tr><th><input type="checkbox" /></th><th>成本类型</th><th>金额</th><th>日期</th><th>操作员</th><th>说明</th><th>操作</th></tr></thead><tbody id="costBody"></tbody></table></div>
+        </section>
+
+        <section class="view" id="view-products">
+          <div class="page-head"><h1>商品管理</h1><div class="actions"><button class="btn light" id="exportProductsBtn" type="button">⇩ 导出Excel</button><button class="btn primary" id="addProductBtn" type="button">＋ 添加商品</button></div></div>
+          <div class="filter-card"><input id="productSearch" type="search" placeholder="搜索商品名称、编码或分类..." /></div>
+          <div class="table-card"><table><thead><tr><th>商品名称</th><th>分类</th><th>单位</th><th>单价</th><th>当前库存</th><th>状态</th><th>操作</th></tr></thead><tbody id="productBody"></tbody></table></div>
+        </section>
+
+        <section class="view" id="view-reports">
+          <div class="page-head"><h1>报表统计</h1><button class="btn light" id="exportReportsBtn" type="button">⇩ 导出Excel</button></div>
+          <div class="metric-grid four"><article class="mini-metric"><i class="bubble green">↗</i><div><span>总入库量</span><strong id="reportInQty">0</strong></div></article><article class="mini-metric"><i class="bubble red">↘</i><div><span>总出库量</span><strong id="reportOutQty">0</strong></div></article><article class="mini-metric"><i class="bubble blue">◈</i><div><span>入库金额</span><strong id="reportInAmount">¥0.00</strong></div></article><article class="mini-metric"><i class="bubble yellow">$</i><div><span>总成本</span><strong id="reportCostTotal">¥0.00</strong></div></article></div>
+          <div class="report-tabs"><button class="tab active" type="button">出入库统计</button><button class="tab" type="button">成本分析</button><button class="tab" type="button">库存周转</button><div class="date-row right"><input id="reportStart" type="date" /><span>至</span><input id="reportEnd" type="date" /><button class="icon-btn" type="button">↻</button></div></div>
+          <article class="panel chart-panel"><h2>每日出入库趋势</h2><canvas id="trendCanvas" width="1400" height="260"></canvas></article>
+          <article class="panel chart-panel"><h2>商品出入库TOP10</h2><div id="reportTopChart" class="empty-frame"></div><div class="legend"><span class="green-dot"></span>入库量 <span class="red-dot"></span>出库量</div></article>
+        </section>
+      </main>
+    </div>
+
+    <dialog id="productDialog">
+      <form method="dialog" id="productForm" class="dialog-card">
+        <h2 id="productDialogTitle">添加商品</h2>
+        <input type="hidden" name="id" />
+        <label>商品名称<input name="name" required placeholder="例如：腰靠-米白色" /></label>
+        <label>分类<input name="category" required placeholder="例如：腰靠" /></label>
+        <label>单位<input name="unit" required value="个" /></label>
+        <label>单价<input name="price" required type="number" min="0" step="0.01" /></label>
+        <label>当前库存<input name="stock" required type="number" min="0" step="1" /></label>
+        <label>预警库存<input name="warning" required type="number" min="0" step="1" value="10" /></label>
+        <menu><button class="btn light" value="cancel" type="button" data-close>取消</button><button class="btn primary" value="default">保存</button></menu>
+      </form>
+    </dialog>
+
+    <dialog id="movementDialog">
+      <form method="dialog" id="movementForm" class="dialog-card">
+        <h2 id="movementTitle">添加入库</h2>
+        <input type="hidden" name="type" />
+        <label>商品<select name="productId" required></select></label>
+        <label id="batchLabel">批次号<input name="batch" placeholder="000" /></label>
+        <label id="supplierLabel">供应商<input name="supplier" placeholder="供应商名称" /></label>
+        <label>数量<input name="quantity" required type="number" min="1" step="1" /></label>
+        <label>日期<input name="date" required type="date" /></label>
+        <label>用途/备注<input name="purpose" placeholder="例如：日常销售/补货" /></label>
+        <menu><button class="btn light" value="cancel" type="button" data-close>取消</button><button class="btn primary" value="default">保存</button></menu>
+      </form>
+    </dialog>
+
+    <dialog id="costDialog">
+      <form method="dialog" id="costForm" class="dialog-card">
+        <h2>添加成本</h2>
+        <label>成本类型<select name="type"><option>采购成本</option><option>快递成本</option><option>代发成本</option><option>其他成本</option></select></label>
+        <label>金额<input name="amount" required type="number" min="0" step="0.01" /></label>
+        <label>日期<input name="date" required type="date" /></label>
+        <label>说明<input name="note" placeholder="例如：汽车坐垫单片代发" /></label>
+        <menu><button class="btn light" value="cancel" type="button" data-close>取消</button><button class="btn primary" value="default">保存</button></menu>
+      </form>
+    </dialog>
+
+    <input id="csvFileInput" type="file" accept=".csv,text/csv" hidden />
+    <script src="app.js"></script>
+  </body>
+</html>
