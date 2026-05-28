@@ -1,0 +1,89 @@
+<!doctype html>
+<html lang="zh-CN">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>星云仓储中枢 - 参考图新版</title>
+    <link rel="stylesheet" href="styles.css?v=reference-v4" />
+  </head>
+  <body data-app-version="reference-v4">
+    <svg aria-hidden="true" class="icon-sprite">
+      <symbol id="icon-logo" viewBox="0 0 24 24"><path d="M3 8.6 12 3l9 5.6v10.8L12 21l-9-1.6V8.6Zm4.2 1.9 4.8 2.7 4.8-2.7L12 7.7l-4.8 2.8Zm.4 3.2v3.1l3 0.5v-2.1l-3-1.5Zm8 1.5v2.1l3-.5v-3.1l-3 1.5Z"/></symbol>
+      <symbol id="icon-dashboard" viewBox="0 0 24 24"><path d="M4 5h7v7H4V5Zm9 0h7v4h-7V5ZM4 14h7v5H4v-5Zm9-3h7v8h-7v-8Z"/></symbol>
+      <symbol id="icon-search" viewBox="0 0 24 24"><path d="M10.7 4a6.7 6.7 0 1 1 0 13.4A6.7 6.7 0 0 1 10.7 4Zm0 2.2a4.5 4.5 0 1 0 0 9 4.5 4.5 0 0 0 0-9Zm5.5 9 4 4-1.6 1.6-4-4 1.6-1.6Z"/></symbol>
+      <symbol id="icon-in" viewBox="0 0 24 24"><path d="M19 5v12H8.8l3.6-3.6-1.6-1.6L4.5 18l6.3 6.2 1.6-1.6L8.8 19H21V5h-2Z" transform="translate(0 -3)"/></symbol>
+      <symbol id="icon-out" viewBox="0 0 24 24"><path d="M5 19V7h10.2l-3.6 3.6 1.6 1.6L19.5 6 13.2-.2l-1.6 1.6L15.2 5H3v14h2Z" transform="translate(0 3)"/></symbol>
+      <symbol id="icon-cost" viewBox="0 0 24 24"><path d="M13 3v2.1c2.3.4 4 1.7 4 3.9h-3c0-.8-.7-1.3-2-1.3-1.2 0-2 .5-2 1.2 0 .8.8 1.1 2.8 1.6 2.8.7 4.7 1.7 4.7 4.2 0 2.2-1.7 3.7-4.5 4.1V21h-2v-2.1c-2.7-.4-4.5-1.9-4.6-4.3h3c.1 1.1 1 1.7 2.5 1.7 1.5 0 2.3-.6 2.3-1.4 0-.8-.7-1.2-2.9-1.8-2.5-.6-4.5-1.5-4.5-4.1 0-2.1 1.7-3.5 4.2-3.9V3h2Z"/></symbol>
+      <symbol id="icon-box" viewBox="0 0 24 24"><path d="m12 2 8 4.5v11L12 22l-8-4.5v-11L12 2Zm0 2.5L7 7.3l5 2.8 5-2.8-5-2.8Zm-5.8 5v6.7l4.7 2.6v-6.7L6.2 9.5Zm11.6 0-4.7 2.6v6.7l4.7-2.6V9.5Z"/></symbol>
+      <symbol id="icon-report" viewBox="0 0 24 24"><path d="M4 19h16v2H4v-2Zm2-8h3v6H6v-6Zm5-6h3v12h-3V5Zm5 3h3v9h-3V8Z"/></symbol>
+      <symbol id="icon-export" viewBox="0 0 24 24"><path d="M11 4h2v8l3-3 1.4 1.4L12 15.8l-5.4-5.4L8 9l3 3V4ZM5 18h14v2H5v-2Z"/></symbol>
+      <symbol id="icon-plus" viewBox="0 0 24 24"><path d="M11 5h2v6h6v2h-6v6h-2v-6H5v-2h6V5Z"/></symbol>
+    </svg>
+    <div class="app-shell">
+      <aside class="sidebar" aria-label="仓库管理导航">
+        <div class="brand">
+          <span class="brand-icon" aria-hidden="true"><svg><use href="#icon-logo"></use></svg></span>
+          <div class="brand-copy"><strong>星云仓储中枢</strong><small>Tmall Warehouse OS</small></div>
+          <span class="version-pill">参考图新版</span>
+        </div>
+        <nav class="nav-list">
+          <button class="nav-item active" data-view="dashboard" type="button"><svg><use href="#icon-dashboard"></use></svg><span>仪表盘</span></button>
+          <button class="nav-item" data-view="inventory" type="button"><svg><use href="#icon-search"></use></svg><span>库存查询</span></button>
+          <button class="nav-item" data-view="stockIn" type="button"><svg><use href="#icon-in"></use></svg><span>入库登记</span></button>
+          <button class="nav-item" data-view="stockOut" type="button"><svg><use href="#icon-out"></use></svg><span>出库登记</span></button>
+          <button class="nav-item" data-view="costs" type="button"><svg><use href="#icon-cost"></use></svg><span>成本登记</span></button>
+          <button class="nav-item" data-view="products" type="button"><svg><use href="#icon-box"></use></svg><span>商品管理</span></button>
+          <button class="nav-item" data-view="reports" type="button"><svg><use href="#icon-report"></use></svg><span>报表统计</span></button>
+        </nav>
+        <div class="sidebar-card"><b>运营提示</b><span>每日闭店前导出库存与出入库流水，便于多电脑同步备份。</span></div>
+        <button class="logout" type="button">⇥ 退出系统</button>
+      </aside>
+
+      <main class="workspace">
+        <section class="view active" id="view-dashboard">
+          <div class="page-head hero-head"><div><p class="kicker">Command Center</p><h1>仪表盘</h1><p>用一屏掌握商品、库存、资金占用与风险预警。</p></div><span class="updated"><b class="version-text">当前为参考图新版</b> · 数据更新时间：<span id="updatedAt"></span></span></div>
+          <div class="metric-grid four">
+            <article class="metric-card featured"><div><span>商品总数</span><strong id="dashProductCount">0</strong><small>SKU 档案覆盖</small></div><i class="icon blue"><svg><use href="#icon-box"></use></svg></i></article>
+            <article class="metric-card"><div><span>总库存</span><strong id="dashStockTotal">0</strong><small>全仓可售件数</small></div><i class="icon green"><svg><use href="#icon-in"></use></svg></i></article>
+            <article class="metric-card"><div><span>库存总额</span><strong id="dashInventoryValue">¥0.00</strong><small>单价 × 当前库存</small></div><i class="icon purple"><svg><use href="#icon-cost"></use></svg></i></article>
+            <article class="metric-card"><div><span>库存预警</span><strong class="danger-text" id="dashWarningCount">0</strong><small>低于安全库存</small></div><i class="icon red"><svg><use href="#icon-report"></use></svg></i></article>
+          </div>
+          <div class="summary-row">
+            <article class="panel half"><div class="panel-title"><div><h2>今日出入库</h2><p>追踪今日作业效率与货值变化</p></div></div><div class="soft-grid"><div class="soft-card in"><span>今日入库</span><strong id="todayInQty">0</strong><small>金额：<b id="todayInAmount">¥0.00</b></small></div><div class="soft-card out"><span>今日出库</span><strong id="todayOutQty">0</strong><small>金额：<b id="todayOutAmount">¥0.00</b></small></div></div></article>
+            <article class="panel half"><div class="panel-title"><div><h2>本月累计出入库</h2><p>月度补货与销售履约走势</p></div></div><div class="soft-grid"><div class="soft-card month-in"><span>本月入库</span><strong id="monthInQty">0</strong><small>金额：<b id="monthInAmount">¥0.00</b></small></div><div class="soft-card month-out"><span>本月出库</span><strong id="monthOutQty">0</strong><small>金额：<b id="monthOutAmount">¥0.00</b></small></div></div></article>
+          </div>
+          <div class="chart-grid">
+            <article class="panel"><div class="panel-title"><h2>库存价值 TOP5 商品</h2><p>快速识别资金占用重点</p></div><div id="valueTopChart" class="bar-chart"></div></article>
+            <article class="panel"><div class="panel-title"><h2>出库数量 TOP5 商品</h2><p>洞察高频发货商品</p></div><div id="outQtyTopChart" class="empty-chart">暂无数据</div></article>
+            <article class="panel"><div class="panel-title"><h2>出库金额 TOP5 商品</h2><p>关注销售贡献与补货优先级</p></div><div id="outAmountTopChart" class="empty-chart">暂无数据</div></article>
+          </div>
+        </section>
+
+        <section class="view" id="view-inventory">
+          <div class="page-head"><div><p class="kicker">Inventory Radar</p><h1>库存查询</h1><p>搜索、筛选并识别低库存风险。</p></div><button class="btn light" id="exportInventoryBtn" type="button"><svg><use href="#icon-export"></use></svg> 导出Excel</button></div>
+          <div class="metric-grid four compact"><article class="mini-metric"><i class="bubble blue"><svg><use href="#icon-box"></use></svg></i><div><span>商品总数</span><strong id="invProductCount">0</strong></div></article><article class="mini-metric"><i class="bubble green"><svg><use href="#icon-in"></use></svg></i><div><span>总库存量</span><strong id="invStockTotal">0</strong></div></article><article class="mini-metric"><i class="bubble blue"><svg><use href="#icon-cost"></use></svg></i><div><span>在库金额</span><strong id="invAmount">¥0.00</strong></div></article><article class="mini-metric"><i class="bubble red"><svg><use href="#icon-report"></use></svg></i><div><span>库存不足</span><strong id="invWarningCount">0</strong></div></article></div>
+          <div class="warning-box" id="warningBox"><strong>智能库存预警</strong><p>以下商品低于安全库存，请优先安排补货或调整销售节奏。</p><div id="warningTags"></div></div>
+          <div class="filter-card"><input id="inventorySearch" type="search" placeholder="搜索商品名称、编码或分类..." /><div class="tabs"><button class="tab active" data-filter="all" type="button">全部 (<span id="tabAll">0</span>)</button><button class="tab" data-filter="normal" type="button">库存正常 (<span id="tabNormal">0</span>)</button><button class="tab" data-filter="low" type="button">库存不足 (<span id="tabLow">0</span>)</button></div></div>
+          <div class="table-card"><table><thead><tr><th>商品名称</th><th>分类</th><th>单位</th><th>单价</th><th>当前库存</th><th>库存金额</th><th>库存状态</th><th>操作</th></tr></thead><tbody id="inventoryBody"></tbody></table></div>
+        </section>
+
+        <section class="view" id="view-stockIn"><div class="page-head"><div><p class="kicker">Inbound Flow</p><h1>入库登记</h1><p>记录采购补货、批次、供应商与入库金额。</p></div><div class="actions"><button class="btn light" id="importStockInBtn" type="button">↥ 批量导入</button><button class="btn light" id="exportStockInBtn" type="button"><svg><use href="#icon-export"></use></svg> 导出 Excel</button><button class="btn primary" id="addStockInBtn" type="button"><svg><use href="#icon-plus"></use></svg> 添加入库</button></div></div><div class="metric-grid three"><article class="metric-card small"><span>入库记录数</span><strong id="inRecordCount">0</strong><small>已归档批次</small></article><article class="metric-card small"><span>总入库数量</span><strong class="blue-text" id="inQtyTotal">0</strong><small>累计补货件数</small></article><article class="metric-card small"><span>总金额</span><strong class="green-text" id="inAmountTotal">¥0.00</strong><small>补货货值</small></article></div><div class="filter-card"><input id="stockInSearch" type="search" placeholder="搜索批次号或商品名称..." /><div class="date-row"><span>▣</span><input id="stockInStart" type="date" /><span>至</span><input id="stockInEnd" type="date" /></div></div><div class="table-card"><table><thead><tr><th><input type="checkbox" /></th><th>批次号</th><th>商品</th><th>供应商</th><th>数量</th><th>单价</th><th>总金额</th><th>入库日期</th><th>操作员</th><th>操作</th></tr></thead><tbody id="stockInBody"></tbody></table></div></section>
+
+        <section class="view" id="view-stockOut"><div class="page-head"><div><p class="kicker">Outbound Flow</p><h1>出库登记</h1><p>记录销售发货、用途与库存扣减过程。</p></div><div class="actions"><button class="btn light" id="importStockOutBtn" type="button">↥ 批量导入</button><button class="btn light" id="exportStockOutBtn" type="button"><svg><use href="#icon-export"></use></svg> 导出Excel</button><button class="btn primary" id="addStockOutBtn" type="button"><svg><use href="#icon-plus"></use></svg> 添加出库</button></div></div><div class="metric-grid two"><article class="metric-card small"><span>出库记录数</span><strong id="outRecordCount">0</strong><small>履约流水</small></article><article class="metric-card small"><span>总出库数量</span><strong class="red-text" id="outQtyTotal">0</strong><small>累计扣减件数</small></article></div><div class="filter-card"><input id="stockOutSearch" type="search" placeholder="搜索商品名称..." /><div class="date-row"><span>▣</span><input id="stockOutStart" type="date" /><span>至</span><input id="stockOutEnd" type="date" /></div></div><div class="table-card"><table><thead><tr><th><input type="checkbox" /></th><th>出库日期</th><th>商品</th><th>数量</th><th>用途</th><th>操作</th></tr></thead><tbody id="stockOutBody"></tbody></table></div></section>
+
+        <section class="view" id="view-costs"><div class="page-head"><div><p class="kicker">Cost Ledger</p><h1>成本登记</h1><p>把采购、快递、代发和其他成本纳入统一台账。</p></div><div class="actions"><button class="btn light" id="exportCostsBtn" type="button"><svg><use href="#icon-export"></use></svg> 导出Excel</button><button class="btn primary" id="addCostBtn" type="button"><svg><use href="#icon-plus"></use></svg> 添加成本</button></div></div><div class="metric-grid four"><article class="metric-card small"><span>总成本</span><strong class="red-text" id="costTotal">¥0.00</strong><small>全部成本合计</small></article><article class="metric-card small"><span>采购成本</span><strong id="purchaseCost">¥0.00</strong><small>进货采购支出</small></article><article class="metric-card small"><span>快递成本</span><strong id="expressCost">¥0.00</strong><small>物流履约费用</small></article><article class="metric-card small"><span>代发成本</span><strong id="agencyCost">¥0.00</strong><small>供应链代发</small></article><article class="metric-card small"><span>其他成本</span><strong id="otherCost">¥0.00</strong><small>杂项费用</small></article></div><div class="filter-card"><select id="costTypeFilter"><option value="all">全部成本类型</option><option value="采购成本">采购成本</option><option value="快递成本">快递成本</option><option value="代发成本">代发成本</option><option value="其他成本">其他成本</option></select></div><div class="table-card"><table><thead><tr><th><input type="checkbox" /></th><th>成本类型</th><th>金额</th><th>日期</th><th>操作员</th><th>说明</th><th>操作</th></tr></thead><tbody id="costBody"></tbody></table></div></section>
+
+        <section class="view" id="view-products"><div class="page-head"><div><p class="kicker">Product Studio</p><h1>商品管理</h1><p>维护商品档案、分类、价格、安全库存和启用状态。</p></div><div class="actions"><button class="btn light" id="exportProductsBtn" type="button"><svg><use href="#icon-export"></use></svg> 导出Excel</button><button class="btn primary" id="addProductBtn" type="button"><svg><use href="#icon-plus"></use></svg> 添加商品</button></div></div><div class="filter-card"><input id="productSearch" type="search" placeholder="搜索商品名称、编码或分类..." /></div><div class="table-card"><table><thead><tr><th>商品名称</th><th>分类</th><th>单位</th><th>单价</th><th>当前库存</th><th>状态</th><th>操作</th></tr></thead><tbody id="productBody"></tbody></table></div></section>
+
+        <section class="view" id="view-reports"><div class="page-head"><div><p class="kicker">Insight Reports</p><h1>报表统计</h1><p>把库存周转、出入库节奏和成本表现汇总成运营视图。</p></div><button class="btn light" id="exportReportsBtn" type="button"><svg><use href="#icon-export"></use></svg> 导出Excel</button></div><div class="metric-grid four"><article class="mini-metric"><i class="bubble green"><svg><use href="#icon-in"></use></svg></i><div><span>总入库量</span><strong id="reportInQty">0</strong></div></article><article class="mini-metric"><i class="bubble red"><svg><use href="#icon-out"></use></svg></i><div><span>总出库量</span><strong id="reportOutQty">0</strong></div></article><article class="mini-metric"><i class="bubble blue"><svg><use href="#icon-box"></use></svg></i><div><span>入库金额</span><strong id="reportInAmount">¥0.00</strong></div></article><article class="mini-metric"><i class="bubble yellow"><svg><use href="#icon-cost"></use></svg></i><div><span>总成本</span><strong id="reportCostTotal">¥0.00</strong></div></article></div><div class="report-tabs"><button class="tab active" type="button">出入库统计</button><button class="tab" type="button">成本分析</button><button class="tab" type="button">库存周转</button><div class="date-row right"><input id="reportStart" type="date" /><span>至</span><input id="reportEnd" type="date" /><button class="icon-btn" type="button">↻</button></div></div><article class="panel chart-panel"><div class="panel-title"><h2>每日出入库趋势</h2><p>用趋势线观察补货与发货节奏</p></div><canvas id="trendCanvas" width="1400" height="260"></canvas></article><article class="panel chart-panel"><div class="panel-title"><h2>商品出入库TOP10</h2><p>用于定位热销款与补货优先级</p></div><div id="reportTopChart" class="empty-frame"></div><div class="legend"><span class="green-dot"></span>入库量 <span class="red-dot"></span>出库量</div></article></section>
+      </main>
+    </div>
+
+    <dialog id="productDialog"><form method="dialog" id="productForm" class="dialog-card"><h2 id="productDialogTitle">添加商品</h2><input type="hidden" name="id" /><label>商品名称<input name="name" required placeholder="例如：腰靠-米白色" /></label><label>分类<input name="category" required placeholder="例如：腰靠" /></label><label>单位<input name="unit" required value="个" /></label><label>单价<input name="price" required type="number" min="0" step="0.01" /></label><label>当前库存<input name="stock" required type="number" min="0" step="1" /></label><label>预警库存<input name="warning" required type="number" min="0" step="1" value="10" /></label><menu><button class="btn light" value="cancel" type="button" data-close>取消</button><button class="btn primary" value="default">保存</button></menu></form></dialog>
+    <dialog id="movementDialog"><form method="dialog" id="movementForm" class="dialog-card"><h2 id="movementTitle">添加入库</h2><input type="hidden" name="type" /><label>商品<select name="productId" required></select></label><label id="batchLabel">批次号<input name="batch" placeholder="000" /></label><label id="supplierLabel">供应商<input name="supplier" placeholder="供应商名称" /></label><label>数量<input name="quantity" required type="number" min="1" step="1" /></label><label>日期<input name="date" required type="date" /></label><label>用途/备注<input name="purpose" placeholder="例如：日常销售/补货" /></label><menu><button class="btn light" value="cancel" type="button" data-close>取消</button><button class="btn primary" value="default">保存</button></menu></form></dialog>
+    <dialog id="costDialog"><form method="dialog" id="costForm" class="dialog-card"><h2>添加成本</h2><label>成本类型<select name="type"><option>采购成本</option><option>快递成本</option><option>代发成本</option><option>其他成本</option></select></label><label>金额<input name="amount" required type="number" min="0" step="0.01" /></label><label>日期<input name="date" required type="date" /></label><label>说明<input name="note" placeholder="例如：汽车坐垫单片代发" /></label><menu><button class="btn light" value="cancel" type="button" data-close>取消</button><button class="btn primary" value="default">保存</button></menu></form></dialog>
+
+    <input id="csvFileInput" type="file" accept=".csv,text/csv" hidden />
+    <script src="app.js?v=reference-v4"></script>
+  </body>
+</html>
