@@ -1,0 +1,172 @@
+<!doctype html>
+<html lang="zh-CN">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>天猫店铺仓库管理系统</title>
+    <link rel="stylesheet" href="styles.css" />
+  </head>
+  <body>
+    <div class="app-shell">
+      <aside class="sidebar" aria-label="系统导航">
+        <div class="brand">
+          <span class="brand-mark">猫</span>
+          <div>
+            <p>天猫店铺</p>
+            <strong>仓库管理系统</strong>
+          </div>
+        </div>
+        <nav>
+          <a href="#dashboard" class="active">数据仪表盘</a>
+          <a href="#manual-form">手动添加</a>
+          <a href="#batch-import">批量导入</a>
+          <a href="#inventory">库存列表</a>
+          <a href="#records">出入库记录</a>
+        </nav>
+      </aside>
+
+      <main>
+        <header class="hero">
+          <div>
+            <p class="eyebrow">Warehouse Control Center</p>
+            <h1>简洁清晰的店铺库存总览</h1>
+            <p>集中管理商品资料、成本、库存数量和每一次出入库流水。</p>
+          </div>
+          <button class="secondary" id="seedDemoBtn" type="button">载入演示数据</button>
+        </header>
+
+        <section id="dashboard" class="dashboard-grid" aria-label="数据仪表盘">
+          <article class="stat-card accent-red">
+            <span>SKU 数量</span>
+            <strong id="skuCount">0</strong>
+            <small>当前商品规格总数</small>
+          </article>
+          <article class="stat-card accent-blue">
+            <span>在库总数</span>
+            <strong id="stockTotal">0</strong>
+            <small>全部商品库存件数</small>
+          </article>
+          <article class="stat-card accent-green">
+            <span>库存成本</span>
+            <strong id="inventoryValue">¥0.00</strong>
+            <small>商品成本 × 在库数量</small>
+          </article>
+          <article class="stat-card accent-yellow">
+            <span>打包成本</span>
+            <strong id="packingValue">¥0.00</strong>
+            <small>打包成本 × 在库数量</small>
+          </article>
+        </section>
+
+        <section class="content-grid">
+          <article id="manual-form" class="panel">
+            <div class="panel-heading">
+              <div>
+                <p class="eyebrow">Manual Entry</p>
+                <h2>手动添加商品</h2>
+              </div>
+            </div>
+            <form id="productForm" class="product-form">
+              <label>
+                商品名称
+                <input name="name" required placeholder="例如：猫粮储存罐" />
+              </label>
+              <label>
+                商品规格
+                <input name="spec" required placeholder="例如：3L / 白色" />
+              </label>
+              <label>
+                商品成本（元）
+                <input name="cost" type="number" min="0" step="0.01" required placeholder="0.00" />
+              </label>
+              <label>
+                打包成本（元）
+                <input name="packingCost" type="number" min="0" step="0.01" required placeholder="0.00" />
+              </label>
+              <label>
+                在库数量
+                <input name="stock" type="number" min="0" step="1" required placeholder="0" />
+              </label>
+              <button type="submit">保存商品</button>
+            </form>
+          </article>
+
+          <article id="batch-import" class="panel">
+            <div class="panel-heading">
+              <div>
+                <p class="eyebrow">Batch Import</p>
+                <h2>批量添加商品</h2>
+              </div>
+              <button class="ghost" id="downloadTemplateBtn" type="button">下载模板</button>
+            </div>
+            <p class="hint">支持 CSV 文件，表头必须为：商品名称,商品规格,商品成本,打包成本,在库数量。</p>
+            <div class="upload-box">
+              <input id="csvInput" type="file" accept=".csv,text/csv" />
+              <span>选择 CSV 后会自动导入并合并同名同规格商品</span>
+            </div>
+            <textarea id="pasteArea" placeholder="也可粘贴 CSV 内容后点击导入"></textarea>
+            <button class="secondary full" id="pasteImportBtn" type="button">导入粘贴内容</button>
+          </article>
+        </section>
+
+        <section id="inventory" class="panel wide-panel">
+          <div class="panel-heading responsive-heading">
+            <div>
+              <p class="eyebrow">Inventory</p>
+              <h2>商品库存列表</h2>
+            </div>
+            <div class="toolbar">
+              <input id="searchInput" type="search" placeholder="搜索商品名称或规格" />
+              <button class="ghost" id="exportBtn" type="button">导出 CSV</button>
+              <button class="danger" id="clearBtn" type="button">清空数据</button>
+            </div>
+          </div>
+          <div class="table-wrap">
+            <table>
+              <thead>
+                <tr>
+                  <th>商品名称</th>
+                  <th>商品规格</th>
+                  <th>商品成本</th>
+                  <th>打包成本</th>
+                  <th>在库数量</th>
+                  <th>入库</th>
+                  <th>出库</th>
+                  <th>操作</th>
+                </tr>
+              </thead>
+              <tbody id="inventoryBody"></tbody>
+            </table>
+          </div>
+          <p id="emptyState" class="empty-state">暂无商品，请先手动添加或批量导入。</p>
+        </section>
+
+        <section id="records" class="panel wide-panel">
+          <div class="panel-heading responsive-heading">
+            <div>
+              <p class="eyebrow">Records</p>
+              <h2>出入库记录</h2>
+            </div>
+            <button class="ghost" id="clearRecordsBtn" type="button">清空记录</button>
+          </div>
+          <div class="records-list" id="recordsList"></div>
+        </section>
+      </main>
+    </div>
+
+    <template id="inventoryRowTemplate">
+      <tr>
+        <td data-label="商品名称" class="name"></td>
+        <td data-label="商品规格" class="spec"></td>
+        <td data-label="商品成本" class="cost"></td>
+        <td data-label="打包成本" class="packingCost"></td>
+        <td data-label="在库数量" class="stock badge-cell"></td>
+        <td data-label="入库"><button class="mini inbound" type="button">入库</button></td>
+        <td data-label="出库"><button class="mini outbound" type="button">出库</button></td>
+        <td data-label="操作"><button class="mini danger delete" type="button">删除</button></td>
+      </tr>
+    </template>
+
+    <script src="app.js"></script>
+  </body>
+</html>
