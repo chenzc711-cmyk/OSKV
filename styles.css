@@ -24,6 +24,8 @@ button { cursor: pointer; }
 .brand { align-items: center; border-bottom: 1px solid var(--line); display: flex; gap: 12px; height: 64px; margin: 0 -16px 16px; padding: 0 24px; }
 .brand-icon { align-items: center; border: 3px solid var(--blue); border-radius: 8px; color: var(--blue); display: inline-flex; font-size: 20px; height: 30px; justify-content: center; width: 30px; }
 .brand strong { font-size: 20px; }
+.version-pill { background: #eaf2ff; border-radius: 999px; color: var(--blue); font-size: 12px; font-weight: 700; margin-left: auto; padding: 4px 8px; }
+.version-text { color: var(--blue); }
 .nav-list { display: grid; gap: 8px; }
 .nav-item, .logout { align-items: center; background: transparent; border: 0; border-radius: 6px; color: #334155; display: flex; gap: 12px; height: 44px; padding: 0 16px; text-align: left; }
 .nav-item.active, .nav-item:hover { background: #eaf2ff; color: var(--blue); }

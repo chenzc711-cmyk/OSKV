@@ -3,15 +3,15 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>仓库管理</title>
-    <link rel="stylesheet" href="styles.css" />
+    <title>仓库管理 - 参考图新版</title>
+    <link rel="stylesheet" href="styles.css?v=reference-v3" />
   </head>
-  <body>
+  <body data-app-version="reference-v3">
     <div class="app-shell">
       <aside class="sidebar" aria-label="仓库管理导航">
         <div class="brand">
           <span class="brand-icon" aria-hidden="true">▣</span>
-          <strong>仓库管理</strong>
+          <strong>仓库管理</strong><span class="version-pill">参考图新版</span>
         </div>
         <nav class="nav-list">
           <button class="nav-item active" data-view="dashboard" type="button">⌘ <span>仪表盘</span></button>
@@ -29,7 +29,7 @@
         <section class="view active" id="view-dashboard">
           <div class="page-head">
             <h1>仪表盘</h1>
-            <span class="updated">数据更新时间：<span id="updatedAt"></span></span>
+            <span class="updated"><b class="version-text">当前为参考图新版</b> · 数据更新时间：<span id="updatedAt"></span></span>
           </div>
           <div class="metric-grid four">
             <article class="metric-card"><div><span>商品总数</span><strong id="dashProductCount">0</strong></div><i class="icon blue">▱</i></article>
@@ -138,6 +138,6 @@
     </dialog>
 
     <input id="csvFileInput" type="file" accept=".csv,text/csv" hidden />
-    <script src="app.js"></script>
+    <script src="app.js?v=reference-v3"></script>
   </body>
 </html>
