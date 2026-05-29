@@ -1,0 +1,234 @@
+page {
+  background: linear-gradient(160deg, #eef8ff 0%, #f8fbff 38%, #f5f3ff 100%);
+  color: #0f172a;
+  font-family: -apple-system, BlinkMacSystemFont, "Helvetica Neue", "PingFang SC", sans-serif;
+}
+
+button::after { border: 0; }
+
+.page {
+  box-sizing: border-box;
+  min-height: 100vh;
+  padding: 24rpx 24rpx 180rpx;
+}
+
+.mini-header {
+  align-items: center;
+  display: flex;
+  gap: 18rpx;
+  margin-bottom: 22rpx;
+}
+
+.brand-mark {
+  align-items: center;
+  background: linear-gradient(135deg, #2563eb, #14b8a6);
+  border-radius: 24rpx;
+  box-shadow: 0 16rpx 34rpx rgba(37, 99, 235, 0.2);
+  color: #fff;
+  display: flex;
+  font-size: 30rpx;
+  font-weight: 900;
+  height: 74rpx;
+  justify-content: center;
+  width: 74rpx;
+}
+
+.brand-copy { display: flex; flex-direction: column; gap: 4rpx; }
+.brand-title { color: #0f172a; font-size: 34rpx; font-weight: 900; letter-spacing: -1rpx; }
+.brand-subtitle { color: #64748b; font-size: 22rpx; }
+
+.hero-card {
+  align-items: center;
+  background: rgba(255, 255, 255, 0.82);
+  border: 1rpx solid rgba(191, 219, 254, 0.9);
+  border-radius: 38rpx;
+  box-shadow: 0 20rpx 48rpx rgba(15, 23, 42, 0.08);
+  display: flex;
+  justify-content: space-between;
+  margin-bottom: 24rpx;
+  overflow: hidden;
+  padding: 30rpx;
+  position: relative;
+}
+
+.hero-card::before {
+  background: radial-gradient(circle, rgba(37, 99, 235, 0.16), transparent 65%);
+  content: "";
+  height: 220rpx;
+  position: absolute;
+  right: -90rpx;
+  top: -100rpx;
+  width: 220rpx;
+}
+
+.hero-copy { position: relative; z-index: 1; }
+.kicker { color: #2563eb; display: block; font-size: 20rpx; font-weight: 900; letter-spacing: 5rpx; text-transform: uppercase; }
+.title { color: #0f172a; display: block; font-size: 46rpx; font-weight: 900; letter-spacing: -2rpx; line-height: 1.18; margin-top: 8rpx; }
+.subtitle { color: #64748b; display: block; font-size: 24rpx; line-height: 1.5; margin-top: 10rpx; }
+.hero-orb {
+  align-items: center;
+  background: linear-gradient(135deg, #dbeafe, #ecfeff);
+  border-radius: 28rpx;
+  color: #2563eb;
+  display: flex;
+  flex-shrink: 0;
+  font-size: 42rpx;
+  font-weight: 900;
+  height: 92rpx;
+  justify-content: center;
+  position: relative;
+  width: 92rpx;
+  z-index: 1;
+}
+
+.content { padding-bottom: 24rpx; }
+.grid { display: grid; gap: 18rpx; margin-bottom: 18rpx; }
+.grid.two { grid-template-columns: 1fr 1fr; }
+.grid.one { grid-template-columns: 1fr; }
+
+.card,
+.list-card {
+  background: rgba(255, 255, 255, 0.92);
+  border: 1rpx solid rgba(226, 232, 240, 0.95);
+  border-radius: 30rpx;
+  box-shadow: 0 14rpx 36rpx rgba(15, 23, 42, 0.06);
+  margin-bottom: 18rpx;
+  padding: 26rpx;
+}
+
+.metric {
+  min-height: 122rpx;
+  position: relative;
+}
+.metric::after {
+  background: linear-gradient(135deg, #dbeafe, #ecfdf5);
+  border-radius: 999rpx;
+  content: "";
+  height: 58rpx;
+  position: absolute;
+  right: 22rpx;
+  top: 22rpx;
+  width: 58rpx;
+}
+.metric.danger::after { background: linear-gradient(135deg, #fee2e2, #fff7ed); }
+.metric text,
+.channel text,
+.channel-total text {
+  color: #64748b;
+  display: block;
+  font-size: 23rpx;
+  font-weight: 700;
+}
+.metric strong,
+.channel strong,
+.channel-total strong {
+  color: #0f172a;
+  display: block;
+  font-size: 40rpx;
+  font-weight: 900;
+  letter-spacing: -1rpx;
+  margin-top: 12rpx;
+}
+.metric.danger strong { color: #ef4444; }
+.channel-total { background: linear-gradient(135deg, rgba(255,255,255,.96), rgba(236,253,245,.92)); }
+.channel-total strong { color: #10b981; font-size: 48rpx; }
+.channel strong { color: #2563eb; }
+
+.section-title {
+  color: #0f172a;
+  font-size: 32rpx;
+  font-weight: 900;
+  letter-spacing: -1rpx;
+  margin-bottom: 20rpx;
+}
+
+input,
+.picker {
+  background: #f8fafc;
+  border: 1rpx solid #cbd5e1;
+  border-radius: 20rpx;
+  box-sizing: border-box;
+  color: #0f172a;
+  font-size: 26rpx;
+  margin-bottom: 16rpx;
+  min-height: 82rpx;
+  padding: 0 24rpx;
+}
+
+.primary {
+  background: linear-gradient(135deg, #2563eb, #4f46e5);
+  border-radius: 22rpx;
+  box-shadow: 0 14rpx 28rpx rgba(37, 99, 235, 0.24);
+  color: #fff;
+  font-size: 28rpx;
+  font-weight: 800;
+  margin-top: 10rpx;
+}
+
+.list-card {
+  align-items: center;
+  display: flex;
+  gap: 20rpx;
+  justify-content: space-between;
+}
+.list-card strong { color: #0f172a; display: block; font-size: 29rpx; font-weight: 900; }
+.list-card text { color: #64748b; display: block; font-size: 23rpx; line-height: 1.45; margin-top: 8rpx; }
+.right { text-align: right; }
+.actions { display: flex; flex-wrap: wrap; gap: 10rpx; justify-content: flex-end; }
+.actions button {
+  background: #eff6ff;
+  border-radius: 16rpx;
+  color: #2563eb;
+  font-size: 22rpx;
+  margin: 0;
+}
+
+.bottom-tabs {
+  background: rgba(255, 255, 255, 0.94);
+  border: 1rpx solid rgba(191, 219, 254, 0.9);
+  border-radius: 36rpx;
+  bottom: 18rpx;
+  box-shadow: 0 -10rpx 42rpx rgba(15, 23, 42, 0.12);
+  box-sizing: border-box;
+  display: grid;
+  gap: 8rpx;
+  grid-template-columns: repeat(4, 1fr);
+  left: 20rpx;
+  padding: 12rpx;
+  padding-bottom: calc(12rpx + env(safe-area-inset-bottom));
+  position: fixed;
+  right: 20rpx;
+  z-index: 30;
+}
+
+.tab-item {
+  align-items: center;
+  background: transparent;
+  border-radius: 24rpx;
+  color: #64748b;
+  display: flex;
+  flex-direction: column;
+  font-size: 22rpx;
+  gap: 6rpx;
+  justify-content: center;
+  line-height: 1.1;
+  margin: 0;
+  min-height: 86rpx;
+  padding: 8rpx 0;
+}
+.tab-item.active {
+  background: linear-gradient(135deg, #2563eb, #4f46e5);
+  box-shadow: 0 12rpx 24rpx rgba(37, 99, 235, 0.24);
+  color: #fff;
+}
+.tab-icon { display: block; font-size: 30rpx; font-weight: 900; }
+.tab-label { display: block; font-size: 21rpx; font-weight: 800; }
+
+@media (max-width: 360px) {
+  .page { padding-left: 18rpx; padding-right: 18rpx; }
+  .grid.two { grid-template-columns: 1fr; }
+  .list-card { align-items: stretch; flex-direction: column; }
+  .right { text-align: left; }
+  .bottom-tabs { left: 14rpx; right: 14rpx; }
+  .tab-label { font-size: 19rpx; }
+}

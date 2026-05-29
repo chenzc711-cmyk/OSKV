@@ -1,0 +1,138 @@
+<view class="page">
+  <view class="mini-header">
+    <view class="brand-mark">拾</view>
+    <view class="brand-copy">
+      <text class="brand-title">拾纷电商仓库</text>
+      <text class="brand-subtitle">汽车用品移动管理端</text>
+    </view>
+  </view>
+
+  <view class="hero-card">
+    <view class="hero-copy">
+      <text class="kicker">{{currentView.key}}</text>
+      <text class="title">{{currentView.title}}</text>
+      <text class="subtitle">{{currentView.desc}}</text>
+    </view>
+    <view class="hero-orb">{{currentView.icon}}</view>
+  </view>
+
+  <view class="content">
+  <view wx:if="{{activeView === 'dashboard'}}">
+    <view class="grid two">
+      <view class="card metric"><text>商品总数</text><strong>{{metrics.productCount}}</strong></view>
+      <view class="card metric"><text>总库存</text><strong>{{metrics.stockTotal}}</strong></view>
+      <view class="card metric"><text>库存总额</text><strong>{{metrics.inventoryValue}}</strong></view>
+      <view class="card metric danger"><text>库存预警</text><strong>{{metrics.warningCount}}</strong></view>
+    </view>
+    <view class="card channel-total">
+      <text>渠道剩余款项合计</text>
+      <strong>{{metrics.channelTotal}}</strong>
+    </view>
+    <view class="grid one">
+      <view class="card channel"><text>普通渠道商</text><strong>{{metrics.generalFunds}}</strong></view>
+      <view class="card channel"><text>3W品牌渠道</text><strong>{{metrics.threeWFunds}}</strong></view>
+      <view class="card channel"><text>台州伊文渠道</text><strong>{{metrics.taizhouFunds}}</strong></view>
+    </view>
+    <view class="card form-card">
+      <view class="section-title">调整渠道款项</view>
+      <picker range="{{channelNames}}" value="{{channelForm.channelIndex}}" bindchange="chooseChannel"><view class="picker">渠道：{{channelNames[channelForm.channelIndex]}}</view></picker>
+      <input placeholder="add 增加 / set 改为指定金额" data-form="channelForm" data-field="mode" value="{{channelForm.mode}}" bindinput="updateForm" />
+      <input type="digit" placeholder="金额" data-form="channelForm" data-field="amount" value="{{channelForm.amount}}" bindinput="updateForm" />
+      <input placeholder="备注" data-form="channelForm" data-field="note" value="{{channelForm.note}}" bindinput="updateForm" />
+      <button class="primary" bindtap="adjustChannel">保存渠道款项</button>
+    </view>
+  </view>
+
+  <view wx:if="{{activeView === 'inventory'}}">
+    <view class="list-card" wx:for="{{inventoryRows}}" wx:key="id">
+      <view><strong>{{item.name}}</strong><text>{{item.code}} · {{item.category}}</text></view>
+      <view class="right"><strong>{{item.stock}}{{item.unit}}</strong><text>单价 ¥{{item.price}}</text></view>
+    </view>
+  </view>
+
+  <view wx:if="{{activeView === 'products'}}" class="card form-card">
+    <view class="section-title">添加商品</view>
+    <input placeholder="商品名称" data-form="productForm" data-field="name" value="{{productForm.name}}" bindinput="updateForm" />
+    <input placeholder="规格分类" data-form="productForm" data-field="category" value="{{productForm.category}}" bindinput="updateForm" />
+    <input placeholder="单位" data-form="productForm" data-field="unit" value="{{productForm.unit}}" bindinput="updateForm" />
+    <input type="digit" placeholder="单价" data-form="productForm" data-field="price" value="{{productForm.price}}" bindinput="updateForm" />
+    <input type="number" placeholder="当前库存" data-form="productForm" data-field="stock" value="{{productForm.stock}}" bindinput="updateForm" />
+    <input type="number" placeholder="预警库存" data-form="productForm" data-field="warning" value="{{productForm.warning}}" bindinput="updateForm" />
+    <button class="primary" bindtap="addProduct">保存商品</button>
+  </view>
+
+  <view wx:if="{{activeView === 'stockIn'}}">
+    <view class="card form-card">
+      <view class="section-title">{{stockInForm.editingId ? '编辑入库' : '添加入库'}}</view>
+      <picker range="{{productNames}}" value="{{stockInForm.productIndex}}" data-form="stockInForm" bindchange="chooseProduct"><view class="picker">商品：{{productNames[stockInForm.productIndex]}}</view></picker>
+      <input placeholder="供应商" data-form="stockInForm" data-field="supplier" value="{{stockInForm.supplier}}" bindinput="updateForm" />
+      <input type="digit" placeholder="入库单价" data-form="stockInForm" data-field="price" value="{{stockInForm.price}}" bindinput="updateForm" />
+      <input type="number" placeholder="数量" data-form="stockInForm" data-field="quantity" value="{{stockInForm.quantity}}" bindinput="updateForm" />
+      <input placeholder="日期 2026-05-29" data-form="stockInForm" data-field="date" value="{{stockInForm.date}}" bindinput="updateForm" />
+      <input placeholder="备注" data-form="stockInForm" data-field="note" value="{{stockInForm.note}}" bindinput="updateForm" />
+      <button class="primary" bindtap="addStockIn">保存入库</button>
+    </view>
+    <view class="list-card" wx:for="{{state.stockIns}}" wx:key="id">
+      <view><strong>{{item.quantity}} 件</strong><text>{{item.date}} · {{item.supplier}}</text></view>
+      <view class="actions"><button size="mini" data-id="{{item.id}}" bindtap="editStockIn">编辑</button><button size="mini" data-list="stockIns" data-id="{{item.id}}" bindtap="deleteRecord">删除</button></view>
+    </view>
+  </view>
+
+  <view wx:if="{{activeView === 'stockOut'}}" class="card form-card">
+    <view class="section-title">添加出库</view>
+    <picker range="{{productNames}}" value="{{stockOutForm.productIndex}}" data-form="stockOutForm" bindchange="chooseProduct"><view class="picker">商品：{{productNames[stockOutForm.productIndex]}}</view></picker>
+    <input type="number" placeholder="数量" data-form="stockOutForm" data-field="quantity" value="{{stockOutForm.quantity}}" bindinput="updateForm" />
+    <input placeholder="日期" data-form="stockOutForm" data-field="date" value="{{stockOutForm.date}}" bindinput="updateForm" />
+    <input placeholder="用途" data-form="stockOutForm" data-field="purpose" value="{{stockOutForm.purpose}}" bindinput="updateForm" />
+    <button class="primary" bindtap="addStockOut">保存出库</button>
+  </view>
+
+  <view wx:if="{{activeView === 'returns'}}" class="card form-card">
+    <view class="section-title">退货入库</view>
+    <picker range="{{productNames}}" value="{{returnForm.productIndex}}" data-form="returnForm" bindchange="chooseProduct"><view class="picker">商品：{{productNames[returnForm.productIndex]}}</view></picker>
+    <input placeholder="订单号" data-form="returnForm" data-field="orderNo" value="{{returnForm.orderNo}}" bindinput="updateForm" />
+    <input placeholder="物流公司" data-form="returnForm" data-field="logisticsCompany" value="{{returnForm.logisticsCompany}}" bindinput="updateForm" />
+    <input placeholder="物流单号" data-form="returnForm" data-field="trackingNo" value="{{returnForm.trackingNo}}" bindinput="updateForm" />
+    <input type="number" placeholder="数量" data-form="returnForm" data-field="quantity" value="{{returnForm.quantity}}" bindinput="updateForm" />
+    <input placeholder="备注" data-form="returnForm" data-field="note" value="{{returnForm.note}}" bindinput="updateForm" />
+    <button class="primary" bindtap="addReturn">保存退货</button>
+  </view>
+
+  <view wx:if="{{activeView === 'costs'}}" class="card form-card">
+    <view class="section-title">成本登记</view>
+    <input placeholder="成本类型" data-form="costForm" data-field="type" value="{{costForm.type}}" bindinput="updateForm" />
+    <input type="digit" placeholder="金额" data-form="costForm" data-field="amount" value="{{costForm.amount}}" bindinput="updateForm" />
+    <input placeholder="日期" data-form="costForm" data-field="date" value="{{costForm.date}}" bindinput="updateForm" />
+    <input placeholder="说明" data-form="costForm" data-field="note" value="{{costForm.note}}" bindinput="updateForm" />
+    <button class="primary" bindtap="addCost">保存成本</button>
+  </view>
+
+  <view wx:if="{{activeView === 'profits'}}">
+    <view class="grid two">
+      <view class="card metric"><text>销售收入</text><strong>{{metrics.revenue}}</strong></view>
+      <view class="card metric"><text>入库成本</text><strong>{{metrics.purchase}}</strong></view>
+      <view class="card metric"><text>费用成本</text><strong>{{metrics.expenses}}</strong></view>
+      <view class="card metric"><text>预估利润</text><strong>{{metrics.netProfit}}</strong></view>
+    </view>
+    <view class="card form-card">
+      <view class="section-title">利润调整</view>
+      <picker range="{{profitTypeNames}}" value="{{profitForm.typeIndex}}" bindchange="chooseProfitType"><view class="picker">类型：{{profitTypeNames[profitForm.typeIndex]}}</view></picker>
+      <picker range="{{productNames}}" value="{{profitForm.productIndex}}" data-form="profitForm" bindchange="chooseProduct"><view class="picker">商品：{{productNames[profitForm.productIndex]}}</view></picker>
+      <input type="digit" placeholder="金额" data-form="profitForm" data-field="amount" value="{{profitForm.amount}}" bindinput="updateForm" />
+      <input placeholder="备注" data-form="profitForm" data-field="note" value="{{profitForm.note}}" bindinput="updateForm" />
+      <button class="primary" bindtap="saveProfitAdjust">保存调整</button>
+    </view>
+    <view class="list-card" wx:for="{{profitRows}}" wx:key="id">
+      <view><strong>{{item.name}}</strong><text>出库 {{item.outQty}} · 退货 {{item.returnQty}}</text></view>
+      <view class="right"><strong>{{item.grossText}}</strong><text>{{item.revenueText}} / {{item.purchaseText}}</text></view>
+    </view>
+  </view>
+  </view>
+
+  <view class="bottom-tabs">
+    <button wx:for="{{views}}" wx:key="key" class="tab-item {{activeView === item.key ? 'active' : ''}}" data-view="{{item.key}}" bindtap="switchView">
+      <text class="tab-icon">{{item.icon}}</text>
+      <text class="tab-label">{{item.name}}</text>
+    </button>
+  </view>
+</view>

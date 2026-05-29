@@ -1,0 +1,18 @@
+{
+  "description": "拾纷电商汽车用品仓库管理系统微信小程序版",
+  "packOptions": {
+    "ignore": []
+  },
+  "setting": {
+    "urlCheck": false,
+    "es6": true,
+    "enhance": true,
+    "postcss": true,
+    "minified": true
+  },
+  "compileType": "miniprogram",
+  "libVersion": "latest",
+  "appid": "touristappid",
+  "projectname": "shifen-warehouse-miniprogram",
+  "miniprogramRoot": "./"
+}
