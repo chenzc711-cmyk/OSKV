@@ -1,0 +1,13 @@
+{
+  "pages": [
+    "pages/index/index"
+  ],
+  "window": {
+    "navigationBarTitleText": "拾纷电商仓库",
+    "navigationBarBackgroundColor": "#2563eb",
+    "navigationBarTextStyle": "white",
+    "backgroundColor": "#f4f7fb"
+  },
+  "style": "v2",
+  "sitemapLocation": "sitemap.json"
+}
