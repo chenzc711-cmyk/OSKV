@@ -3,354 +3,280 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>拾纷电商汽车用品仓库管理系统</title>
+    <title>仓库管理 - 参考图新版</title>
     <style>
 :root {
   color-scheme: light;
-  --bg: #f4f7fb;
-  --panel: rgba(255, 255, 255, 0.92);
+  --bg: #f6f7fb;
+  --panel: #fff;
   --text: #0f172a;
   --muted: #64748b;
-  --line: #e2e8f0;
+  --line: #e5e7eb;
   --blue: #2563eb;
-  --cyan: #06b6d4;
-  --green: #10b981;
+  --green: #16a34a;
   --red: #ef4444;
   --orange: #f97316;
-  --purple: #8b5cf6;
-  --ink: #111827;
-  --shadow: 0 16px 40px rgba(15, 23, 42, 0.08);
-  --soft-shadow: 0 1px 2px rgba(15, 23, 42, 0.05), 0 10px 26px rgba(37, 99, 235, 0.05);
+  --purple: #9333ea;
+  --shadow: 0 1px 2px rgba(15, 23, 42, 0.04), 0 6px 16px rgba(15, 23, 42, 0.04);
   font-family: Inter, "PingFang SC", "Microsoft YaHei", system-ui, sans-serif;
 }
 
 * { box-sizing: border-box; }
-body { margin: 0; background: radial-gradient(circle at 20% 0%, #e0f2fe 0, transparent 28%), radial-gradient(circle at 90% 10%, #ede9fe 0, transparent 24%), var(--bg); color: var(--text); }
+body { margin: 0; background: var(--bg); color: var(--text); }
 button, input, select { font: inherit; }
 button { cursor: pointer; }
-svg { fill: currentColor; height: 1em; width: 1em; }
-.icon-sprite { height: 0; position: absolute; width: 0; }
 
-.app-shell { display: grid; grid-template-columns: 280px 1fr; min-height: 100vh; }
-.sidebar { background: linear-gradient(180deg, #ffffff 0%, #f8fbff 100%); border-right: 1px solid rgba(226, 232, 240, 0.9); display: flex; flex-direction: column; height: 100vh; left: 0; padding: 0 18px 18px; position: sticky; top: 0; }
-.brand { align-items: center; border-bottom: 1px solid var(--line); display: grid; gap: 12px; grid-template-columns: 42px 1fr; min-height: 82px; margin: 0 -18px 18px; padding: 0 22px; }
-.brand-icon { align-items: center; background: linear-gradient(135deg, var(--blue), var(--cyan)); border-radius: 14px; box-shadow: 0 14px 28px rgba(37, 99, 235, 0.28); color: white; display: inline-flex; font-size: 24px; height: 42px; justify-content: center; width: 42px; }
-.brand-copy strong { display: block; font-size: 22px; letter-spacing: -0.04em; line-height: 1.05; }
-.version-pill { background: #eaf2ff; border: 1px solid #bfdbfe; border-radius: 999px; color: var(--blue); font-size: 12px; font-weight: 800; padding: 5px 9px; white-space: nowrap; }
+.app-shell { display: grid; grid-template-columns: 256px 1fr; min-height: 100vh; }
+.sidebar { background: #fff; border-right: 1px solid var(--line); display: flex; flex-direction: column; height: 100vh; left: 0; padding: 0 16px; position: sticky; top: 0; }
+.brand { align-items: center; border-bottom: 1px solid var(--line); display: flex; gap: 12px; height: 64px; margin: 0 -16px 16px; padding: 0 24px; }
+.brand-icon { align-items: center; border: 3px solid var(--blue); border-radius: 8px; color: var(--blue); display: inline-flex; font-size: 20px; height: 30px; justify-content: center; width: 30px; }
+.brand strong { font-size: 20px; }
+.version-pill { background: #eaf2ff; border-radius: 999px; color: var(--blue); font-size: 12px; font-weight: 700; margin-left: auto; padding: 4px 8px; }
 .version-text { color: var(--blue); }
 .nav-list { display: grid; gap: 8px; }
-.nav-item, .logout { align-items: center; background: transparent; border: 0; border-radius: 14px; color: #334155; display: flex; gap: 12px; min-height: 46px; padding: 0 16px; text-align: left; transition: 0.2s ease; }
-.nav-item svg { color: #64748b; font-size: 19px; }
-.nav-item.active, .nav-item:hover { background: linear-gradient(135deg, #eff6ff, #eef2ff); box-shadow: inset 3px 0 0 var(--blue); color: var(--blue); }
-.nav-item.active svg, .nav-item:hover svg { color: var(--blue); }
-.sidebar-card { background: linear-gradient(135deg, #111827, #1e3a8a); border-radius: 18px; color: white; margin-top: auto; padding: 18px; position: relative; overflow: hidden; }
-.sidebar-card::after { background: rgba(255,255,255,.16); border-radius: 999px; content: ""; height: 86px; position: absolute; right: -32px; top: -22px; width: 86px; }
-.sidebar-card b, .sidebar-card span { display: block; position: relative; z-index: 1; }
-.sidebar-card span { color: #dbeafe; font-size: 12px; line-height: 1.7; margin-top: 8px; }
-.logout { background: #f1f5f9; justify-content: center; margin-top: 14px; }
-.workspace { min-width: 0; padding: 32px; }
+.nav-item, .logout { align-items: center; background: transparent; border: 0; border-radius: 6px; color: #334155; display: flex; gap: 12px; height: 44px; padding: 0 16px; text-align: left; }
+.nav-item.active, .nav-item:hover { background: #eaf2ff; color: var(--blue); }
+.logout { background: #f3f4f6; justify-content: center; margin-top: 24px; }
+.workspace { padding: 32px; min-width: 0; }
 .view { display: none; }
 .view.active { display: block; }
+.page-head { align-items: center; display: flex; justify-content: space-between; margin-bottom: 24px; }
+h1 { font-size: 26px; margin: 0; }
+h2 { font-size: 18px; margin: 0 0 18px; }
+.updated { color: var(--muted); }
+.actions { display: flex; gap: 8px; }
 
-.page-head { align-items: center; display: flex; justify-content: space-between; gap: 18px; margin-bottom: 24px; }
-.hero-head { background: linear-gradient(135deg, rgba(255,255,255,.95), rgba(239,246,255,.92)); border: 1px solid rgba(191, 219, 254, .75); border-radius: 28px; box-shadow: var(--shadow); padding: 28px; position: relative; overflow: hidden; }
-.hero-head::after { background: linear-gradient(135deg, rgba(37,99,235,.15), rgba(6,182,212,.18)); border-radius: 999px; content: ""; height: 180px; position: absolute; right: -50px; top: -70px; width: 180px; }
-.kicker { color: var(--blue); font-size: 12px; font-weight: 900; letter-spacing: .18em; margin: 0 0 8px; text-transform: uppercase; }
-h1 { font-size: clamp(26px, 3vw, 38px); letter-spacing: -0.04em; line-height: 1.05; margin: 0; }
-h2 { font-size: 18px; letter-spacing: -0.02em; margin: 0; }
-.page-head p, .panel-title p { color: var(--muted); margin: 8px 0 0; }
-.updated { color: var(--muted); position: relative; z-index: 1; white-space: nowrap; }
-.actions { display: flex; flex-wrap: wrap; gap: 10px; }
-
-.btn { align-items: center; border: 1px solid var(--line); border-radius: 12px; display: inline-flex; gap: 8px; min-height: 40px; padding: 0 16px; transition: .18s ease; }
-.btn.primary { background: linear-gradient(135deg, var(--blue), #4f46e5); border-color: transparent; box-shadow: 0 12px 24px rgba(37, 99, 235, .22); color: #fff; }
-.btn.light { background: rgba(255,255,255,.9); color: #334155; }
-.btn:hover, .tab:hover, .link-btn:hover { transform: translateY(-1px); }
+.btn { border: 1px solid var(--line); border-radius: 6px; height: 38px; padding: 0 16px; }
+.btn.primary { background: var(--blue); border-color: var(--blue); color: #fff; }
+.btn.light { background: #fff; color: #334155; }
 .icon-btn { background: transparent; border: 0; color: #64748b; font-size: 20px; }
 
 .metric-grid { display: grid; gap: 16px; margin-bottom: 24px; }
 .metric-grid.four { grid-template-columns: repeat(4, minmax(0, 1fr)); }
-.metric-grid.five { grid-template-columns: repeat(5, minmax(0, 1fr)); }
 .metric-grid.three { grid-template-columns: repeat(3, minmax(0, 1fr)); }
 .metric-grid.two { grid-template-columns: repeat(2, minmax(0, 1fr)); }
-.metric-card, .mini-metric, .panel, .filter-card, .table-card, .report-tabs { background: var(--panel); border: 1px solid rgba(226, 232, 240, .9); border-radius: 20px; box-shadow: var(--soft-shadow); backdrop-filter: blur(12px); }
-.metric-card { align-items: center; display: flex; justify-content: space-between; min-height: 116px; overflow: hidden; padding: 24px; position: relative; }
-.metric-card::before { background: linear-gradient(135deg, rgba(37,99,235,.08), transparent 65%); content: ""; inset: 0; opacity: .9; position: absolute; }
-.metric-card > * { position: relative; z-index: 1; }
-.metric-card.featured { background: linear-gradient(135deg, #ffffff, #eff6ff); }
-.metric-card.small { align-items: flex-start; display: block; min-height: 96px; }
-.metric-card span, .mini-metric span { color: var(--muted); display: block; font-weight: 700; margin-bottom: 8px; }
-.metric-card strong, .mini-metric strong { display: block; font-size: 30px; letter-spacing: -0.04em; line-height: 1; }
-.metric-card small { color: #94a3b8; display: block; margin-top: 10px; }
-.icon { align-items: center; border-radius: 20px; display: inline-flex; font-size: 34px; height: 58px; justify-content: center; width: 58px; }
-.icon.blue { background: #dbeafe; color: var(--blue); } .icon.green { background: #dcfce7; color: var(--green); } .icon.red { background: #fee2e2; color: var(--red); } .icon.purple { background: #ede9fe; color: var(--purple); }
+.metric-card, .mini-metric, .panel, .filter-card, .table-card, .report-tabs { background: var(--panel); border: 1px solid var(--line); border-radius: 8px; box-shadow: var(--shadow); }
+.metric-card { align-items: center; display: flex; justify-content: space-between; min-height: 104px; padding: 24px; }
+.metric-card.small { align-items: flex-start; display: block; min-height: 86px; }
+.metric-card span, .mini-metric span { color: var(--muted); display: block; margin-bottom: 6px; }
+.metric-card strong, .mini-metric strong { display: block; font-size: 28px; line-height: 1; }
+.metric-card.small strong { font-size: 24px; }
+.icon { font-size: 42px; font-style: normal; }
 .blue, .blue-text { color: var(--blue); } .green, .green-text { color: var(--green); } .red, .red-text, .danger-text { color: var(--red); } .purple { color: var(--purple); }
-.mini-metric { align-items: center; display: flex; gap: 14px; min-height: 92px; padding: 20px; }
-.bubble { align-items: center; border-radius: 16px; display: inline-flex; font-style: normal; height: 44px; justify-content: center; width: 44px; }
-.bubble.blue { background: #dbeafe; color: var(--blue); } .bubble.green { background: #dcfce7; color: var(--green); } .bubble.red { background: #fee2e2; color: var(--red); } .bubble.yellow { background: #fef3c7; color: #d97706; }
+.mini-metric { align-items: center; display: flex; gap: 14px; min-height: 86px; padding: 20px; }
+.bubble { align-items: center; border-radius: 999px; display: inline-flex; font-style: normal; height: 40px; justify-content: center; width: 40px; }
+.bubble.blue { background: #dbeafe; } .bubble.green { background: #dcfce7; } .bubble.red { background: #fee2e2; } .bubble.yellow { background: #fef3c7; color: #d97706; }
 
 .summary-row { display: grid; gap: 20px; grid-template-columns: 1fr 1fr; margin-bottom: 24px; }
 .panel { padding: 24px; }
-.panel-title { align-items: flex-start; display: flex; justify-content: space-between; margin-bottom: 18px; }
 .soft-grid { display: grid; gap: 16px; grid-template-columns: 1fr 1fr; }
-.soft-card { border: 1px solid rgba(255,255,255,.6); border-radius: 18px; overflow: hidden; padding: 18px; position: relative; }
-.soft-card::after { border-radius: 999px; content: ""; height: 70px; opacity: .18; position: absolute; right: -20px; top: -22px; width: 70px; }
+.soft-card { border-radius: 8px; padding: 18px; }
 .soft-card span, .soft-card small { color: var(--muted); display: block; }
-.soft-card strong { display: block; font-size: 28px; letter-spacing: -0.04em; margin: 12px 0; }
-.soft-card.in { background: #ecfdf5; color: var(--green); } .soft-card.in::after { background: var(--green); }
-.soft-card.out { background: #fff1f2; color: var(--red); } .soft-card.out::after { background: var(--red); }
-.soft-card.month-in { background: #eff6ff; color: var(--blue); } .soft-card.month-in::after { background: var(--blue); }
-.soft-card.month-out { background: #fff7ed; color: var(--orange); } .soft-card.month-out::after { background: var(--orange); }
+.soft-card strong { display: block; font-size: 26px; margin: 12px 0; }
+.soft-card.in { background: #ecfdf5; color: var(--green); } .soft-card.out { background: #fff1f2; color: var(--red); } .soft-card.month-in { background: #eff6ff; color: var(--blue); } .soft-card.month-out { background: #fff7ed; color: var(--orange); }
 .chart-grid { display: grid; gap: 24px; grid-template-columns: repeat(3, minmax(0, 1fr)); }
 .bar-chart { height: 300px; padding: 8px 4px; }
-.bar-row { align-items: center; display: grid; gap: 10px; grid-template-columns: 110px 1fr 82px; margin: 16px 0; }
+.bar-row { align-items: center; display: grid; gap: 10px; grid-template-columns: 96px 1fr 78px; margin: 16px 0; }
 .bar-label { color: #475569; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
-.bar-track { background-image: linear-gradient(to right, rgba(148,163,184,.3) 1px, transparent 1px); background-size: 25% 100%; border: 1px dashed #cbd5e1; border-radius: 999px; height: 34px; overflow: hidden; }
-.bar-fill { background: linear-gradient(90deg, var(--blue), var(--cyan)); border-radius: inherit; height: 100%; }
+.bar-track { background-image: linear-gradient(to right, #d1d5db 1px, transparent 1px); background-size: 25% 100%; border: 1px dashed #d1d5db; height: 34px; }
+.bar-fill { background: #3b82f6; height: 100%; }
 .bar-value { color: #64748b; text-align: right; }
 .empty-chart { align-items: center; color: var(--muted); display: flex; height: 300px; justify-content: center; }
 
-.warning-box { background: linear-gradient(135deg, #fff7ed, #fff1f2); border: 1px solid #fecaca; border-radius: 20px; color: var(--red); margin-bottom: 24px; padding: 20px; }
+.warning-box { background: #fff; border: 2px solid #ff6b6b; border-radius: 8px; color: var(--red); margin-bottom: 24px; padding: 18px; }
 .warning-box.hidden { display: none; }
-.warning-box strong { display: block; font-size: 18px; }
-.warning-box p { color: #9f1239; margin: 8px 0 0; }
-#warningTags { display: flex; flex-wrap: wrap; gap: 8px; margin-top: 14px; }
-.warn-tag { background: rgba(254, 226, 226, .9); border: 1px solid #fecaca; border-radius: 999px; color: #dc2626; padding: 7px 12px; }
+#warningTags { display: flex; flex-wrap: wrap; gap: 8px; margin-top: 12px; }
+.warn-tag { background: #fee2e2; border-radius: 999px; color: #dc2626; padding: 7px 12px; }
 .filter-card { margin-bottom: 24px; padding: 16px; }
-input, select { background: #fff; border: 1px solid #cfd8e3; border-radius: 12px; height: 42px; outline: none; padding: 0 14px; transition: .18s ease; }
-input:focus, select:focus { border-color: var(--blue); box-shadow: 0 0 0 4px rgba(37, 99, 235, .12); }
+input, select { background: #fff; border: 1px solid #cfd8e3; border-radius: 6px; height: 38px; outline: none; padding: 0 12px; }
+input:focus, select:focus { border-color: var(--blue); box-shadow: 0 0 0 3px rgba(37, 99, 235, .12); }
 .filter-card input[type="search"] { width: 100%; }
-.filter-line { align-items: center; display: grid; gap: 12px; grid-template-columns: minmax(220px, 1fr) 190px; }
-.filter-line select { min-width: 170px; }
-.tabs { display: flex; flex-wrap: wrap; gap: 8px; margin-top: 16px; }
-.tab { background: #f8fafc; border: 1px solid var(--line); border-radius: 999px; color: #334155; height: 38px; padding: 0 18px; transition: .18s ease; }
-.tab.active { background: linear-gradient(135deg, var(--blue), #4f46e5); border-color: transparent; box-shadow: 0 10px 18px rgba(37,99,235,.18); color: #fff; }
-.date-row { align-items: center; display: flex; flex-wrap: wrap; gap: 10px; margin-top: 16px; }
+.tabs { display: flex; gap: 8px; margin-top: 16px; }
+.tab { background: #f8fafc; border: 0; border-radius: 999px; color: #334155; height: 36px; padding: 0 18px; }
+.tab.active { background: var(--blue); color: #fff; }
+.date-row { align-items: center; display: flex; gap: 10px; margin-top: 16px; }
 .date-row.right { margin: 0 0 0 auto; }
 
 .table-card { overflow-x: auto; }
-table { border-collapse: separate; border-spacing: 0; min-width: 980px; width: 100%; }
+table { border-collapse: collapse; min-width: 980px; width: 100%; }
 th, td { border-bottom: 1px solid var(--line); padding: 16px 24px; text-align: left; white-space: nowrap; }
-th { background: #f8fafc; color: #64748b; font-size: 13px; font-weight: 800; letter-spacing: .02em; }
-td { height: 62px; }
-tbody tr { transition: .16s ease; }
-tbody tr:hover { background: #f8fbff; }
-.product-title strong { display: block; }
-.product-title small { color: var(--muted); display: block; margin-top: 5px; }
-.money { color: var(--blue); font-weight: 700; }
+th { background: #f8fafc; color: #64748b; font-size: 13px; font-weight: 500; }
+td { height: 58px; }
+.money { color: var(--blue); }
 .stock-cell { align-items: center; display: flex; gap: 8px; }
-.stock-bar { background: #e5e7eb; border-radius: 999px; height: 8px; overflow: hidden; width: 104px; }
-.stock-bar span { background: linear-gradient(90deg, #22c55e, #06b6d4); display: block; height: 100%; }
-.badge { border-radius: 999px; display: inline-flex; font-weight: 800; padding: 5px 10px; }
+.stock-bar { background: #e5e7eb; border-radius: 999px; height: 7px; overflow: hidden; width: 96px; }
+.stock-bar span { background: #22c55e; display: block; height: 100%; }
+.badge { border-radius: 999px; display: inline-flex; font-weight: 700; padding: 4px 9px; }
 .badge.ok { background: #dcfce7; color: #15803d; }
 .badge.low { background: #fee2e2; color: #dc2626; }
-.action-row { display: inline-flex; gap: 6px; }
-.link-btn, .delete-btn { background: transparent; border: 0; border-radius: 9px; padding: 7px 8px; transition: .18s ease; }
-.link-btn { color: var(--blue); } .link-btn:hover { background: #eff6ff; }
-.delete-btn { color: var(--red); } .delete-btn:hover { background: #fef2f2; }
-.cost-chip { background: #dbeafe; border-radius: 999px; color: #1d4ed8; font-weight: 800; padding: 6px 11px; }
+.link-btn { background: transparent; border: 0; color: var(--blue); padding: 0 6px; }
+.delete-btn { background: transparent; border: 0; color: var(--red); padding: 0 6px; }
+.cost-chip { background: #dbeafe; border-radius: 999px; color: #1d4ed8; font-weight: 700; padding: 5px 10px; }
 
-.report-tabs { align-items: center; display: flex; flex-wrap: wrap; gap: 10px; margin-bottom: 24px; padding: 16px; }
+.report-tabs { align-items: center; display: flex; gap: 10px; margin-bottom: 24px; padding: 16px; }
 .chart-panel { margin-bottom: 24px; }
 #trendCanvas { height: 300px; max-width: 100%; width: 100%; }
-.empty-frame, .top-frame { background: repeating-linear-gradient(45deg, #f8fafc, #f8fafc 10px, #ffffff 10px, #ffffff 20px); border: 1px dashed #cbd5e1; border-radius: 18px; min-height: 260px; margin: 10px auto 24px; width: 92%; }
-.top-frame { background: #fff; border-style: solid; display: grid; gap: 12px; padding: 18px; }
-.top-row { align-items: center; display: grid; gap: 10px; grid-template-columns: 130px 1fr 1fr 54px; }
-.outbound-only .top-row { grid-template-columns: 180px 1fr 64px; padding: 8px 0; }
-.top-row span { color: #475569; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
-.top-row b, .top-row i { border-radius: 999px; display: block; height: 12px; min-width: 4px; }
-.outbound-only .top-row i { box-shadow: 0 8px 18px rgba(239, 68, 68, .18); height: 14px; }
-.top-row b { background: linear-gradient(90deg, #10b981, #34d399); justify-self: end; }
-.top-row i { background: linear-gradient(90deg, #f87171, #ef4444); justify-self: start; }
-.top-row em { color: var(--muted); font-style: normal; text-align: right; }
+.empty-frame { border: 1px dashed #cbd5e1; height: 260px; margin: 10px auto 24px; width: 92%; }
 .legend { color: var(--muted); text-align: center; }
-.green-dot, .red-dot { border-radius: 999px; display: inline-block; height: 12px; margin: 0 5px 0 16px; width: 12px; }
+.green-dot, .red-dot { display: inline-block; height: 12px; margin: 0 5px 0 16px; width: 12px; }
 .green-dot { background: #10b981; } .red-dot { background: #ef4444; }
 
-dialog { border: 0; border-radius: 22px; box-shadow: 0 28px 90px rgba(15, 23, 42, .28); padding: 0; width: min(560px, calc(100vw - 32px)); }
-dialog::backdrop { background: rgba(15, 23, 42, .42); backdrop-filter: blur(5px); }
-.dialog-card { display: grid; gap: 14px; padding: 26px; }
-.dialog-card h2 { margin-bottom: 4px; }
-.dialog-card label { color: var(--muted); display: grid; gap: 7px; font-weight: 700; }
+dialog { border: 0; border-radius: 12px; box-shadow: 0 20px 70px rgba(15, 23, 42, .22); padding: 0; width: min(520px, calc(100vw - 32px)); }
+dialog::backdrop { background: rgba(15, 23, 42, .35); }
+.dialog-card { display: grid; gap: 14px; padding: 24px; }
+.dialog-card label { color: var(--muted); display: grid; gap: 6px; }
 .dialog-card menu { display: flex; gap: 10px; justify-content: flex-end; margin: 8px 0 0; padding: 0; }
 
-@media (max-width: 1200px) { .metric-grid.five, .metric-grid.four, .chart-grid, .channel-grid { grid-template-columns: repeat(2, minmax(0, 1fr)); } .summary-row { grid-template-columns: 1fr; } }
-@media (max-width: 760px) { .filter-line { grid-template-columns: 1fr; } .app-shell { grid-template-columns: 1fr; } .sidebar { height: auto; position: static; } .workspace { padding: 18px; } .page-head, .actions, .report-tabs { align-items: stretch; flex-direction: column; } .metric-grid.five, .metric-grid.four, .metric-grid.three, .metric-grid.two, .chart-grid, .channel-grid, .soft-grid { grid-template-columns: 1fr; } .updated { white-space: normal; } }
-
-/* 手机网页端适配：顶部横向导航、紧凑卡片和可滑动表格 */
-@media (max-width: 900px) {
-  body { background-attachment: fixed; }
-  .app-shell { display: block; min-height: 100vh; }
-  .sidebar { border-bottom: 1px solid rgba(226, 232, 240, .95); border-right: 0; height: auto; padding: 0 12px 12px; position: sticky; top: 0; z-index: 20; }
-  .brand { grid-template-columns: 38px 1fr; min-height: 64px; margin: 0 -12px 10px; padding: 0 16px; }
-  .brand-icon { border-radius: 12px; font-size: 21px; height: 38px; width: 38px; }
-  .brand-copy strong { font-size: 18px; }
-  .nav-list { display: flex; gap: 8px; margin: 0 -4px; overflow-x: auto; padding: 4px 4px 8px; scrollbar-width: none; }
-  .nav-list::-webkit-scrollbar { display: none; }
-  .nav-item { flex: 0 0 auto; min-height: 40px; padding: 0 13px; white-space: nowrap; }
-  .nav-item.active, .nav-item:hover { box-shadow: inset 0 -3px 0 var(--blue); }
-  .sidebar-card, .logout { display: none; }
-  .workspace { padding: 18px; }
-  .table-card { -webkit-overflow-scrolling: touch; border-radius: 16px; }
-  table { min-width: 860px; }
-  th, td { padding: 13px 16px; }
-}
-
-@media (max-width: 640px) {
-  body { font-size: 14px; }
-  .workspace { padding: 14px; }
-  .page-head, .hero-head { border-radius: 20px; padding: 18px; }
-  .page-head { align-items: stretch; flex-direction: column; }
-  h1 { font-size: 28px; }
-  h2 { font-size: 16px; }
-  .updated { white-space: normal; }
-  .actions { display: grid; grid-template-columns: 1fr; width: 100%; }
-  .btn { justify-content: center; width: 100%; }
-  .metric-card, .mini-metric, .panel, .filter-card, .table-card { border-radius: 16px; }
-  .metric-card { min-height: 96px; padding: 18px; }
-  .metric-card strong, .mini-metric strong { font-size: 26px; }
-  .summary-row, .soft-grid { grid-template-columns: 1fr; }
-  .channel-total .panel-title { gap: 12px; flex-direction: column; }
-  .channel-total strong { font-size: 30px; }
-  .filter-card { padding: 14px; }
-  .date-row { align-items: stretch; display: grid; grid-template-columns: 1fr; }
-  input, select { min-height: 44px; width: 100%; }
-  .tabs { overflow-x: auto; padding-bottom: 4px; flex-wrap: nowrap; }
-  .tab { flex: 0 0 auto; }
-  dialog { border-radius: 20px 20px 0 0; max-height: 92vh; overflow-y: auto; width: 100vw; }
-  dialog::backdrop { backdrop-filter: blur(3px); }
-  .dialog-card { padding: 20px; }
-  .dialog-card menu { display: grid; grid-template-columns: 1fr; }
-}
+@media (max-width: 1200px) { .metric-grid.four, .chart-grid { grid-template-columns: repeat(2, minmax(0, 1fr)); } .summary-row { grid-template-columns: 1fr; } }
+@media (max-width: 760px) { .app-shell { grid-template-columns: 1fr; } .sidebar { height: auto; position: static; } .workspace { padding: 18px; } .page-head, .actions, .report-tabs { align-items: stretch; flex-direction: column; } .metric-grid.four, .metric-grid.three, .metric-grid.two, .chart-grid, .soft-grid { grid-template-columns: 1fr; } }
 
     </style>
   </head>
-  <body data-app-version="reference-v10">
-    <svg aria-hidden="true" class="icon-sprite">
-      <symbol id="icon-logo" viewBox="0 0 24 24"><path d="M3 8.6 12 3l9 5.6v10.8L12 21l-9-1.6V8.6Zm4.2 1.9 4.8 2.7 4.8-2.7L12 7.7l-4.8 2.8Zm.4 3.2v3.1l3 0.5v-2.1l-3-1.5Zm8 1.5v2.1l3-.5v-3.1l-3 1.5Z"/></symbol>
-      <symbol id="icon-dashboard" viewBox="0 0 24 24"><path d="M4 5h7v7H4V5Zm9 0h7v4h-7V5ZM4 14h7v5H4v-5Zm9-3h7v8h-7v-8Z"/></symbol>
-      <symbol id="icon-search" viewBox="0 0 24 24"><path d="M10.7 4a6.7 6.7 0 1 1 0 13.4A6.7 6.7 0 0 1 10.7 4Zm0 2.2a4.5 4.5 0 1 0 0 9 4.5 4.5 0 0 0 0-9Zm5.5 9 4 4-1.6 1.6-4-4 1.6-1.6Z"/></symbol>
-      <symbol id="icon-in" viewBox="0 0 24 24"><path d="M19 5v12H8.8l3.6-3.6-1.6-1.6L4.5 18l6.3 6.2 1.6-1.6L8.8 19H21V5h-2Z" transform="translate(0 -3)"/></symbol>
-      <symbol id="icon-out" viewBox="0 0 24 24"><path d="M5 19V7h10.2l-3.6 3.6 1.6 1.6L19.5 6 13.2-.2l-1.6 1.6L15.2 5H3v14h2Z" transform="translate(0 3)"/></symbol>
-      <symbol id="icon-cost" viewBox="0 0 24 24"><path d="M13 3v2.1c2.3.4 4 1.7 4 3.9h-3c0-.8-.7-1.3-2-1.3-1.2 0-2 .5-2 1.2 0 .8.8 1.1 2.8 1.6 2.8.7 4.7 1.7 4.7 4.2 0 2.2-1.7 3.7-4.5 4.1V21h-2v-2.1c-2.7-.4-4.5-1.9-4.6-4.3h3c.1 1.1 1 1.7 2.5 1.7 1.5 0 2.3-.6 2.3-1.4 0-.8-.7-1.2-2.9-1.8-2.5-.6-4.5-1.5-4.5-4.1 0-2.1 1.7-3.5 4.2-3.9V3h2Z"/></symbol>
-      <symbol id="icon-box" viewBox="0 0 24 24"><path d="m12 2 8 4.5v11L12 22l-8-4.5v-11L12 2Zm0 2.5L7 7.3l5 2.8 5-2.8-5-2.8Zm-5.8 5v6.7l4.7 2.6v-6.7L6.2 9.5Zm11.6 0-4.7 2.6v6.7l4.7-2.6V9.5Z"/></symbol>
-      <symbol id="icon-report" viewBox="0 0 24 24"><path d="M4 19h16v2H4v-2Zm2-8h3v6H6v-6Zm5-6h3v12h-3V5Zm5 3h3v9h-3V8Z"/></symbol>
-      <symbol id="icon-export" viewBox="0 0 24 24"><path d="M11 4h2v8l3-3 1.4 1.4L12 15.8l-5.4-5.4L8 9l3 3V4ZM5 18h14v2H5v-2Z"/></symbol>
-      <symbol id="icon-plus" viewBox="0 0 24 24"><path d="M11 5h2v6h6v2h-6v6h-2v-6H5v-2h6V5Z"/></symbol>
-    </svg>
+  <body data-app-version="reference-v3">
     <div class="app-shell">
       <aside class="sidebar" aria-label="仓库管理导航">
         <div class="brand">
-          <span class="brand-icon" aria-hidden="true"><svg><use href="#icon-logo"></use></svg></span>
-          <div class="brand-copy"><strong>拾纷电商</strong></div>
+          <span class="brand-icon" aria-hidden="true">▣</span>
+          <strong>仓库管理</strong><span class="version-pill">参考图新版</span>
         </div>
         <nav class="nav-list">
-          <button class="nav-item active" data-view="dashboard" type="button"><svg><use href="#icon-dashboard"></use></svg><span>仪表盘</span></button>
-          <button class="nav-item" data-view="inventory" type="button"><svg><use href="#icon-search"></use></svg><span>库存查询</span></button>
-          <button class="nav-item" data-view="stockIn" type="button"><svg><use href="#icon-in"></use></svg><span>入库登记</span></button>
-          <button class="nav-item" data-view="stockOut" type="button"><svg><use href="#icon-out"></use></svg><span>出库登记</span></button>
-          <button class="nav-item" data-view="returns" type="button"><svg><use href="#icon-in"></use></svg><span>退货入库</span></button>
-          <button class="nav-item" data-view="costs" type="button"><svg><use href="#icon-cost"></use></svg><span>成本登记</span></button>
-          <button class="nav-item" data-view="products" type="button"><svg><use href="#icon-box"></use></svg><span>商品管理</span></button>
-          <button class="nav-item" data-view="profits" type="button"><svg><use href="#icon-report"></use></svg><span>利润计算</span></button>
+          <button class="nav-item active" data-view="dashboard" type="button">⌘ <span>仪表盘</span></button>
+          <button class="nav-item" data-view="inventory" type="button">⌕ <span>库存查询</span></button>
+          <button class="nav-item" data-view="stockIn" type="button">↙ <span>入库登记</span></button>
+          <button class="nav-item" data-view="stockOut" type="button">↗ <span>出库登记</span></button>
+          <button class="nav-item" data-view="costs" type="button">$ <span>成本登记</span></button>
+          <button class="nav-item" data-view="products" type="button">◈ <span>商品管理</span></button>
+          <button class="nav-item" data-view="reports" type="button">▥ <span>报表统计</span></button>
         </nav>
-        <div class="sidebar-card"><b>运营提示</b><span>每日闭店前导出库存与出入库流水，便于多电脑同步备份。</span></div>
         <button class="logout" type="button">⇥ 退出系统</button>
       </aside>
 
       <main class="workspace">
         <section class="view active" id="view-dashboard">
-          <div class="page-head hero-head"><div><p class="kicker">Command Center</p><h1>拾纷电商汽车用品仓库管理系统</h1><p>用一屏掌握汽车用品商品、库存、资金占用与风险预警。</p></div><span class="updated">数据更新时间：<span id="updatedAt"></span></span></div>
+          <div class="page-head">
+            <h1>仪表盘</h1>
+            <span class="updated"><b class="version-text">当前为参考图新版</b> · 数据更新时间：<span id="updatedAt"></span></span>
+          </div>
           <div class="metric-grid four">
-            <article class="metric-card featured"><div><span>商品总数</span><strong id="dashProductCount">0</strong><small>SKU 档案覆盖</small></div><i class="icon blue"><svg><use href="#icon-box"></use></svg></i></article>
-            <article class="metric-card"><div><span>总库存</span><strong id="dashStockTotal">0</strong><small>全仓可售件数</small></div><i class="icon green"><svg><use href="#icon-in"></use></svg></i></article>
-            <article class="metric-card"><div><span>库存总额</span><strong id="dashInventoryValue">¥0.00</strong><small>单价 × 当前库存</small></div><i class="icon purple"><svg><use href="#icon-cost"></use></svg></i></article>
-            <article class="metric-card"><div><span>库存预警</span><strong class="danger-text" id="dashWarningCount">0</strong><small>低于安全库存</small></div><i class="icon red"><svg><use href="#icon-report"></use></svg></i></article>
+            <article class="metric-card"><div><span>商品总数</span><strong id="dashProductCount">0</strong></div><i class="icon blue">▱</i></article>
+            <article class="metric-card"><div><span>总库存</span><strong id="dashStockTotal">0</strong></div><i class="icon green">↗</i></article>
+            <article class="metric-card"><div><span>库存总额</span><strong id="dashInventoryValue">¥0.00</strong></div><i class="icon purple">$</i></article>
+            <article class="metric-card"><div><span>库存预警</span><strong class="danger-text" id="dashWarningCount">0</strong></div><i class="icon red">⚠</i></article>
           </div>
           <div class="summary-row">
-            <article class="panel half"><div class="panel-title"><div><h2>今日出入库</h2><p>追踪今日作业效率与货值变化</p></div></div><div class="soft-grid"><div class="soft-card in"><span>今日入库</span><strong id="todayInQty">0</strong><small>金额：<b id="todayInAmount">¥0.00</b></small></div><div class="soft-card out"><span>今日出库</span><strong id="todayOutQty">0</strong><small>金额：<b id="todayOutAmount">¥0.00</b></small></div></div></article>
-            <article class="panel half"><div class="panel-title"><div><h2>本月累计出入库</h2><p>月度补货与销售履约走势</p></div></div><div class="soft-grid"><div class="soft-card month-in"><span>本月入库</span><strong id="monthInQty">0</strong><small>金额：<b id="monthInAmount">¥0.00</b></small></div><div class="soft-card month-out"><span>本月出库</span><strong id="monthOutQty">0</strong><small>金额：<b id="monthOutAmount">¥0.00</b></small></div></div></article>
+            <article class="panel half"><h2>今日出入库</h2><div class="soft-grid"><div class="soft-card in"><span>↙ 今日入库</span><strong id="todayInQty">0</strong><small>金额：<b id="todayInAmount">¥0.00</b></small></div><div class="soft-card out"><span>↗ 今日出库</span><strong id="todayOutQty">0</strong><small>金额：<b id="todayOutAmount">¥0.00</b></small></div></div></article>
+            <article class="panel half"><h2>本月累计出入库</h2><div class="soft-grid"><div class="soft-card month-in"><span>↙ 本月入库</span><strong id="monthInQty">0</strong><small>金额：<b id="monthInAmount">¥0.00</b></small></div><div class="soft-card month-out"><span>↗ 本月出库</span><strong id="monthOutQty">0</strong><small>金额：<b id="monthOutAmount">¥0.00</b></small></div></div></article>
           </div>
-          <div class="channel-grid">
-            <article class="panel channel-total"><div class="panel-title"><div><h2>渠道剩余款项合计</h2><p>统一合并计算全部渠道商余额</p></div><button class="btn primary" id="adjustChannelBtn" type="button">调整款项</button></div><strong id="dashChannelFunds">¥0.00</strong><small id="dashChannelNote">可分别登记渠道金额和备注</small></article>
-            <article class="panel channel-card"><span>普通渠道商剩余款项</span><strong id="channelGeneralFunds">¥0.00</strong></article>
-            <article class="panel channel-card"><span>3W品牌渠道剩余款项</span><strong id="channelThreeWFunds">¥0.00</strong></article>
-            <article class="panel channel-card"><span>台州伊文渠道剩余款项</span><strong id="channelTaizhouFunds">¥0.00</strong></article>
+          <div class="chart-grid">
+            <article class="panel"><h2>库存价值 TOP5 商品</h2><div id="valueTopChart" class="bar-chart"></div></article>
+            <article class="panel"><h2>出库数量 TOP5 商品</h2><div id="outQtyTopChart" class="empty-chart">暂无数据</div></article>
+            <article class="panel"><h2>出库金额 TOP5 商品</h2><div id="outAmountTopChart" class="empty-chart">暂无数据</div></article>
           </div>
         </section>
 
         <section class="view" id="view-inventory">
-          <div class="page-head"><div><p class="kicker">Inventory Radar</p><h1>库存查询</h1><p>搜索、筛选并识别低库存风险。</p></div><button class="btn light" id="exportInventoryBtn" type="button"><svg><use href="#icon-export"></use></svg> 导出Excel</button></div>
-          <div class="metric-grid four compact"><article class="mini-metric"><i class="bubble blue"><svg><use href="#icon-box"></use></svg></i><div><span>商品总数</span><strong id="invProductCount">0</strong></div></article><article class="mini-metric"><i class="bubble green"><svg><use href="#icon-in"></use></svg></i><div><span>总库存量</span><strong id="invStockTotal">0</strong></div></article><article class="mini-metric"><i class="bubble blue"><svg><use href="#icon-cost"></use></svg></i><div><span>在库金额</span><strong id="invAmount">¥0.00</strong></div></article><article class="mini-metric"><i class="bubble red"><svg><use href="#icon-report"></use></svg></i><div><span>库存不足</span><strong id="invWarningCount">0</strong></div></article></div>
-          <div class="warning-box" id="warningBox"><strong>智能库存预警</strong><p>以下商品低于安全库存，请优先安排补货或调整销售节奏。</p><div id="warningTags"></div></div>
-          <div class="filter-card"><div class="filter-line"><input id="inventorySearch" type="search" placeholder="搜索商品名称、编码或规格分类..." /><select id="inventoryCategoryFilter" aria-label="按规格分类筛选"><option value="all">全部规格分类</option></select></div><div class="tabs"><button class="tab active" data-filter="all" type="button">全部 (<span id="tabAll">0</span>)</button><button class="tab" data-filter="normal" type="button">库存正常 (<span id="tabNormal">0</span>)</button><button class="tab" data-filter="low" type="button">库存不足 (<span id="tabLow">0</span>)</button></div></div>
-          <div class="table-card"><table><thead><tr><th>商品名称</th><th>规格分类</th><th>单位</th><th>单价</th><th>当前库存</th><th>库存金额</th><th>库存状态</th><th>操作</th></tr></thead><tbody id="inventoryBody"></tbody></table></div>
+          <div class="page-head"><h1>库存查询</h1><button class="btn light" id="exportInventoryBtn" type="button">⇩ 导出Excel</button></div>
+          <div class="metric-grid four compact">
+            <article class="mini-metric"><i class="bubble blue">◈</i><div><span>商品总数</span><strong id="invProductCount">0</strong></div></article>
+            <article class="mini-metric"><i class="bubble green">↗</i><div><span>总库存量</span><strong id="invStockTotal">0</strong></div></article>
+            <article class="mini-metric"><i class="bubble blue">$</i><div><span>在库金额</span><strong id="invAmount">¥0.00</strong></div></article>
+            <article class="mini-metric"><i class="bubble red">⚠</i><div><span>库存不足</span><strong id="invWarningCount">0</strong></div></article>
+          </div>
+          <div class="warning-box" id="warningBox"><strong>⚠ 库存预警</strong><div id="warningTags"></div></div>
+          <div class="filter-card"><input id="inventorySearch" type="search" placeholder="搜索商品名称、编码或分类..." /><div class="tabs"><button class="tab active" data-filter="all" type="button">全部 (<span id="tabAll">0</span>)</button><button class="tab" data-filter="normal" type="button">库存正常 (<span id="tabNormal">0</span>)</button><button class="tab" data-filter="low" type="button">库存不足 (<span id="tabLow">0</span>)</button></div></div>
+          <div class="table-card"><table><thead><tr><th>商品名称</th><th>分类</th><th>单位</th><th>单价</th><th>当前库存</th><th>库存金额</th><th>库存状态</th><th>操作</th></tr></thead><tbody id="inventoryBody"></tbody></table></div>
         </section>
 
-        <section class="view" id="view-stockIn"><div class="page-head"><div><p class="kicker">Inbound Flow</p><h1>入库登记</h1><p>记录采购补货、批次、供应商与入库金额。</p></div><div class="actions"><button class="btn light" id="importStockInBtn" type="button">↥ 批量导入 CSV/XLSX</button><button class="btn light" id="exportStockInBtn" type="button"><svg><use href="#icon-export"></use></svg> 导出 Excel</button><button class="btn primary" id="addStockInBtn" type="button"><svg><use href="#icon-plus"></use></svg> 添加入库</button></div></div><div class="metric-grid three"><article class="metric-card small"><span>入库记录数</span><strong id="inRecordCount">0</strong><small>已归档批次</small></article><article class="metric-card small"><span>总入库数量</span><strong class="blue-text" id="inQtyTotal">0</strong><small>累计补货件数</small></article><article class="metric-card small"><span>总金额</span><strong class="green-text" id="inAmountTotal">¥0.00</strong><small>补货货值</small></article></div><div class="filter-card"><div class="filter-line"><input id="stockInSearch" type="search" placeholder="搜索商品名称..." /><select id="stockInCategoryFilter" aria-label="按规格分类筛选"><option value="all">全部规格分类</option></select></div><div class="date-row"><span>▣</span><input id="stockInStart" type="date" /><span>至</span><input id="stockInEnd" type="date" /></div></div><div class="table-card"><table><thead><tr><th><input id="stockInSelectAll" type="checkbox" /></th><th>商品</th><th>供应商</th><th>数量</th><th>单价</th><th>总金额</th><th>入库日期</th><th>操作员</th><th>备注</th><th>操作</th></tr></thead><tbody id="stockInBody"></tbody></table></div></section>
+        <section class="view" id="view-stockIn">
+          <div class="page-head"><h1>入库登记</h1><div class="actions"><button class="btn light" id="importStockInBtn" type="button">↥ 批量导入</button><button class="btn light" id="exportStockInBtn" type="button">⇩ 导出 Excel</button><button class="btn primary" id="addStockInBtn" type="button">＋ 添加入库</button></div></div>
+          <div class="metric-grid three"><article class="metric-card small"><span>入库记录数</span><strong id="inRecordCount">0</strong></article><article class="metric-card small"><span>总入库数量</span><strong class="blue-text" id="inQtyTotal">0</strong></article><article class="metric-card small"><span>总金额</span><strong class="green-text" id="inAmountTotal">¥0.00</strong></article></div>
+          <div class="filter-card"><input id="stockInSearch" type="search" placeholder="搜索批次号或商品名称..." /><div class="date-row"><span>▣</span><input id="stockInStart" type="date" /><span>至</span><input id="stockInEnd" type="date" /></div></div>
+          <div class="table-card"><table><thead><tr><th><input type="checkbox" /></th><th>批次号</th><th>商品</th><th>供应商</th><th>数量</th><th>单价</th><th>总金额</th><th>入库日期</th><th>操作员</th><th>操作</th></tr></thead><tbody id="stockInBody"></tbody></table></div>
+        </section>
 
-        <section class="view" id="view-stockOut"><div class="page-head"><div><p class="kicker">Outbound Flow</p><h1>出库登记</h1><p>记录销售发货、用途与库存扣减过程。</p></div><div class="actions"><button class="btn light" id="importStockOutBtn" type="button">↥ 批量导入 CSV/XLSX</button><button class="btn light" id="exportStockOutBtn" type="button"><svg><use href="#icon-export"></use></svg> 导出Excel</button><button class="btn primary" id="addStockOutBtn" type="button"><svg><use href="#icon-plus"></use></svg> 添加出库</button></div></div><div class="metric-grid two"><article class="metric-card small"><span>出库记录数</span><strong id="outRecordCount">0</strong><small>履约流水</small></article><article class="metric-card small"><span>总出库数量</span><strong class="red-text" id="outQtyTotal">0</strong><small>累计扣减件数</small></article></div><div class="filter-card"><div class="filter-line"><input id="stockOutSearch" type="search" placeholder="搜索商品名称..." /><select id="stockOutCategoryFilter" aria-label="按规格分类筛选"><option value="all">全部规格分类</option></select></div><div class="date-row"><span>▣</span><input id="stockOutStart" type="date" /><span>至</span><input id="stockOutEnd" type="date" /></div></div><div class="table-card"><table><thead><tr><th><input type="checkbox" /></th><th>出库日期</th><th>商品</th><th>数量</th><th>用途</th><th>操作</th></tr></thead><tbody id="stockOutBody"></tbody></table></div></section>
+        <section class="view" id="view-stockOut">
+          <div class="page-head"><h1>出库登记</h1><div class="actions"><button class="btn light" id="importStockOutBtn" type="button">↥ 批量导入</button><button class="btn light" id="exportStockOutBtn" type="button">⇩ 导出Excel</button><button class="btn primary" id="addStockOutBtn" type="button">＋ 添加出库</button></div></div>
+          <div class="metric-grid two"><article class="metric-card small"><span>出库记录数</span><strong id="outRecordCount">0</strong></article><article class="metric-card small"><span>总出库数量</span><strong class="red-text" id="outQtyTotal">0</strong></article></div>
+          <div class="filter-card"><input id="stockOutSearch" type="search" placeholder="搜索商品名称..." /><div class="date-row"><span>▣</span><input id="stockOutStart" type="date" /><span>至</span><input id="stockOutEnd" type="date" /></div></div>
+          <div class="table-card"><table><thead><tr><th><input type="checkbox" /></th><th>出库日期</th><th>商品</th><th>数量</th><th>用途</th><th>操作</th></tr></thead><tbody id="stockOutBody"></tbody></table></div>
+        </section>
 
-        <section class="view" id="view-returns"><div class="page-head"><div><p class="kicker">Return Inbound</p><h1>退货入库</h1><p>登记退货订单、物流单号、物流公司、退款创建时间和备注。</p></div><div class="actions"><button class="btn light" id="importReturnsBtn" type="button">↥ 批量导入 CSV/XLSX</button><button class="btn light" id="exportReturnsBtn" type="button"><svg><use href="#icon-export"></use></svg> 导出Excel</button><button class="btn primary" id="addReturnBtn" type="button"><svg><use href="#icon-plus"></use></svg> 添加退货入库</button></div></div><div class="metric-grid three"><article class="metric-card small"><span>退货记录数</span><strong id="returnRecordCount">0</strong><small>已登记退货单</small></article><article class="metric-card small"><span>退货入库数量</span><strong class="blue-text" id="returnQtyTotal">0</strong><small>累计退回件数</small></article><article class="metric-card small"><span>涉及订单数</span><strong id="returnOrderCount">0</strong><small>去重订单号</small></article></div><div class="filter-card"><input id="returnSearch" type="search" placeholder="搜索订单号、物流公司、物流单号、商品或备注..." /><div class="date-row"><span>▣</span><input id="returnStart" type="date" /><span>至</span><input id="returnEnd" type="date" /></div></div><div class="table-card"><table><thead><tr><th>退货日期</th><th>退款创建时间</th><th>订单号</th><th>物流公司</th><th>物流单号</th><th>物品名称</th><th>物品数量</th><th>操作人</th><th>备注</th><th>操作</th></tr></thead><tbody id="returnBody"></tbody></table></div></section>
+        <section class="view" id="view-costs">
+          <div class="page-head"><h1>成本登记</h1><div class="actions"><button class="btn light" id="exportCostsBtn" type="button">⇩ 导出Excel</button><button class="btn primary" id="addCostBtn" type="button">＋ 添加成本</button></div></div>
+          <div class="metric-grid four"><article class="metric-card small"><span>总成本</span><strong class="red-text" id="costTotal">¥0.00</strong></article><article class="metric-card small"><span>采购成本</span><strong id="purchaseCost">¥0.00</strong></article><article class="metric-card small"><span>快递成本</span><strong id="expressCost">¥0.00</strong></article><article class="metric-card small"><span>代发成本</span><strong id="agencyCost">¥0.00</strong></article><article class="metric-card small"><span>其他成本</span><strong id="otherCost">¥0.00</strong></article></div>
+          <div class="filter-card"><select id="costTypeFilter"><option value="all">全部成本类型</option><option value="采购成本">采购成本</option><option value="快递成本">快递成本</option><option value="代发成本">代发成本</option><option value="其他成本">其他成本</option></select></div>
+          <div class="table-card"><table><thead><tr><th><input type="checkbox" /></th><th>成本类型</th><th>金额</th><th>日期</th><th>操作员</th><th>说明</th><th>操作</th></tr></thead><tbody id="costBody"></tbody></table></div>
+        </section>
 
-        <section class="view" id="view-costs"><div class="page-head"><div><p class="kicker">Cost Ledger</p><h1>成本登记</h1><p>把采购、快递、代发和其他成本纳入统一台账。</p></div><div class="actions"><button class="btn light" id="exportCostsBtn" type="button"><svg><use href="#icon-export"></use></svg> 导出Excel</button><button class="btn primary" id="addCostBtn" type="button"><svg><use href="#icon-plus"></use></svg> 添加成本</button></div></div><div class="metric-grid four"><article class="metric-card small"><span>总成本</span><strong class="red-text" id="costTotal">¥0.00</strong><small>全部成本合计</small></article><article class="metric-card small"><span>采购成本</span><strong id="purchaseCost">¥0.00</strong><small>进货采购支出</small></article><article class="metric-card small"><span>快递成本</span><strong id="expressCost">¥0.00</strong><small>物流履约费用</small></article><article class="metric-card small"><span>代发成本</span><strong id="agencyCost">¥0.00</strong><small>供应链代发</small></article><article class="metric-card small"><span>其他成本</span><strong id="otherCost">¥0.00</strong><small>杂项费用</small></article></div><div class="filter-card"><select id="costTypeFilter"><option value="all">全部成本类型</option><option value="采购成本">采购成本</option><option value="快递成本">快递成本</option><option value="代发成本">代发成本</option><option value="其他成本">其他成本</option></select></div><div class="table-card"><table><thead><tr><th><input type="checkbox" /></th><th>成本类型</th><th>金额</th><th>日期</th><th>操作员</th><th>说明</th><th>操作</th></tr></thead><tbody id="costBody"></tbody></table></div></section>
+        <section class="view" id="view-products">
+          <div class="page-head"><h1>商品管理</h1><div class="actions"><button class="btn light" id="exportProductsBtn" type="button">⇩ 导出Excel</button><button class="btn primary" id="addProductBtn" type="button">＋ 添加商品</button></div></div>
+          <div class="filter-card"><input id="productSearch" type="search" placeholder="搜索商品名称、编码或分类..." /></div>
+          <div class="table-card"><table><thead><tr><th>商品名称</th><th>分类</th><th>单位</th><th>单价</th><th>当前库存</th><th>状态</th><th>操作</th></tr></thead><tbody id="productBody"></tbody></table></div>
+        </section>
 
-        <section class="view" id="view-products"><div class="page-head"><div><p class="kicker">Product Studio</p><h1>商品管理</h1><p>维护商品档案、规格分类、价格、安全库存和启用状态。</p></div><div class="actions"><button class="btn light" id="importProductsBtn" type="button">↥ 批量添加商品</button><button class="btn light" id="exportProductsBtn" type="button"><svg><use href="#icon-export"></use></svg> 导出Excel</button><button class="btn primary" id="addProductBtn" type="button"><svg><use href="#icon-plus"></use></svg> 添加商品</button></div></div><div class="filter-card"><div class="filter-line"><input id="productSearch" type="search" placeholder="搜索商品名称、编码或规格分类..." /><select id="productCategoryFilter" aria-label="按规格分类筛选"><option value="all">全部规格分类</option></select></div></div><div class="table-card"><table><thead><tr><th>商品名称</th><th>规格分类</th><th>单位</th><th>单价</th><th>当前库存</th><th>状态</th><th>操作</th></tr></thead><tbody id="productBody"></tbody></table></div></section>
-
-        <section class="view" id="view-profits"><div class="page-head"><div><p class="kicker">Profit Center</p><h1>利润计算</h1><p>销售、采购、费用和人工调整全部可登记、可编辑、可导出。</p></div><div class="actions"><button class="btn light" id="exportProfitsBtn" type="button"><svg><use href="#icon-export"></use></svg> 导出Excel</button><button class="btn primary" id="addProfitAdjustBtn" type="button"><svg><use href="#icon-plus"></use></svg> 登记利润调整</button></div></div><div class="metric-grid four"><article class="mini-metric"><i class="bubble blue"><svg><use href="#icon-out"></use></svg></i><div><span>销售收入</span><strong id="profitRevenue">¥0.00</strong><small id="profitRevenueBase">自动 + 手动</small></div></article><article class="mini-metric"><i class="bubble yellow"><svg><use href="#icon-in"></use></svg></i><div><span>入库采购成本</span><strong id="profitPurchaseCost">¥0.00</strong><small id="profitPurchaseBase">入库单价 × 数量</small></div></article><article class="mini-metric"><i class="bubble red"><svg><use href="#icon-cost"></use></svg></i><div><span>费用成本</span><strong id="profitExpenseCost">¥0.00</strong><small id="profitExpenseBase">成本登记 + 手动</small></div></article><article class="mini-metric"><i class="bubble green"><svg><use href="#icon-report"></use></svg></i><div><span>预估利润</span><strong id="profitNet">¥0.00</strong><small>收入 - 成本</small></div></article></div><div class="table-card"><table><thead><tr><th>商品名称</th><th>出库数量</th><th>销售金额</th><th>入库数量</th><th>入库成本</th><th>退货数量</th><th>预估毛利</th><th>操作</th></tr></thead><tbody id="profitBody"></tbody></table></div><div class="table-card profit-ledger"><div class="panel-title"><div><h2>利润调整登记</h2><p>用于补登记差价、退款、优惠、人工成本或其他影响利润的金额。</p></div></div><table><thead><tr><th>类型</th><th>金额</th><th>日期</th><th>关联商品</th><th>备注</th><th>操作</th></tr></thead><tbody id="profitAdjustBody"></tbody></table></div></section>
+        <section class="view" id="view-reports">
+          <div class="page-head"><h1>报表统计</h1><button class="btn light" id="exportReportsBtn" type="button">⇩ 导出Excel</button></div>
+          <div class="metric-grid four"><article class="mini-metric"><i class="bubble green">↗</i><div><span>总入库量</span><strong id="reportInQty">0</strong></div></article><article class="mini-metric"><i class="bubble red">↘</i><div><span>总出库量</span><strong id="reportOutQty">0</strong></div></article><article class="mini-metric"><i class="bubble blue">◈</i><div><span>入库金额</span><strong id="reportInAmount">¥0.00</strong></div></article><article class="mini-metric"><i class="bubble yellow">$</i><div><span>总成本</span><strong id="reportCostTotal">¥0.00</strong></div></article></div>
+          <div class="report-tabs"><button class="tab active" type="button">出入库统计</button><button class="tab" type="button">成本分析</button><button class="tab" type="button">库存周转</button><div class="date-row right"><input id="reportStart" type="date" /><span>至</span><input id="reportEnd" type="date" /><button class="icon-btn" type="button">↻</button></div></div>
+          <article class="panel chart-panel"><h2>每日出入库趋势</h2><canvas id="trendCanvas" width="1400" height="260"></canvas></article>
+          <article class="panel chart-panel"><h2>商品出入库TOP10</h2><div id="reportTopChart" class="empty-frame"></div><div class="legend"><span class="green-dot"></span>入库量 <span class="red-dot"></span>出库量</div></article>
+        </section>
       </main>
     </div>
 
-    <dialog id="productDialog"><form method="dialog" id="productForm" class="dialog-card"><h2 id="productDialogTitle">添加商品</h2><input type="hidden" name="id" /><label>商品名称<input name="name" required placeholder="例如：腰靠-米白色" /></label><label>规格分类<select name="category" required></select></label><label>单位<input name="unit" required value="个" /></label><label>单价<input name="price" required type="number" min="0" step="0.01" /></label><label>当前库存<input name="stock" required type="number" min="0" step="1" /></label><label>预警库存<input name="warning" required type="number" min="0" step="1" value="10" /></label><menu><button class="btn light" value="cancel" type="button" data-close>取消</button><button class="btn primary" value="default">保存</button></menu></form></dialog>
-    <dialog id="movementDialog"><form method="dialog" id="movementForm" class="dialog-card"><h2 id="movementTitle">添加入库</h2><input type="hidden" name="type" /><input type="hidden" name="id" /><label>商品<select name="productId" required></select></label><label id="batchLabel">批次号<input name="batch" placeholder="000" /></label><label id="supplierLabel">供应商<input name="supplier" placeholder="供应商名称" /></label><label id="movementPriceLabel">入库单价<input name="price" type="number" min="0" step="0.01" /></label><label>数量<input name="quantity" required type="number" min="1" step="1" /></label><label>日期<input name="date" required type="date" /></label><label>用途/备注<input name="purpose" placeholder="例如：日常销售/补货" /></label><menu><button class="btn light" value="cancel" type="button" data-close>取消</button><button class="btn primary" value="default">保存</button></menu></form></dialog>
-    <dialog id="costDialog"><form method="dialog" id="costForm" class="dialog-card"><h2>添加成本</h2><label>成本类型<select name="type"><option>采购成本</option><option>快递成本</option><option>代发成本</option><option>其他成本</option></select></label><label>金额<input name="amount" required type="number" min="0" step="0.01" /></label><label>日期<input name="date" required type="date" /></label><label>说明<input name="note" placeholder="例如：汽车坐垫单片代发" /></label><menu><button class="btn light" value="cancel" type="button" data-close>取消</button><button class="btn primary" value="default">保存</button></menu></form></dialog>
-    <dialog id="channelDialog"><form method="dialog" id="channelForm" class="dialog-card"><h2>调整渠道商剩余款项</h2><label>渠道<select name="channel"><option value="general">普通渠道商</option><option value="threeW">3W品牌渠道</option><option value="taizhouYiwen">台州伊文渠道</option></select></label><label>调整方式<select name="mode"><option value="add">增加金额</option><option value="set">改为指定金额</option></select></label><label>金额<input name="amount" required type="number" min="0" step="0.01" /></label><label>备注<input name="note" placeholder="例如：渠道商充值/扣款调整" /></label><menu><button class="btn light" value="cancel" type="button" data-close>取消</button><button class="btn primary" value="default">保存</button></menu></form></dialog>
-    <dialog id="profitAdjustDialog"><form method="dialog" id="profitAdjustForm" class="dialog-card"><h2 id="profitAdjustTitle">登记利润调整</h2><input type="hidden" name="id" /><label>调整类型<select name="type"><option value="revenue">销售收入调整</option><option value="purchase">入库采购成本调整</option><option value="expense">费用成本调整</option></select></label><label>关联商品<select name="productId"><option value="">不关联商品</option></select></label><label>金额<input name="amount" required type="number" step="0.01" /></label><label>日期<input name="date" required type="date" /></label><label>备注<input name="note" placeholder="例如：售价差额/采购差额/人工费用" /></label><menu><button class="btn light" value="cancel" type="button" data-close>取消</button><button class="btn primary" value="default">保存</button></menu></form></dialog>
-    <dialog id="returnDialog"><form method="dialog" id="returnForm" class="dialog-card"><h2 id="returnDialogTitle">添加退货入库</h2><input type="hidden" name="id" /><label>退货日期<input name="returnDate" required type="date" /></label><label>退款创建时间<input name="refundCreatedAt" required type="date" /></label><label>订单号<input name="orderNo" required placeholder="例如：TM20260528001" /></label><label>物流公司<input name="logisticsCompany" required placeholder="例如：顺丰速运" /></label><label>物流单号<input name="trackingNo" required placeholder="例如：SF1234567890" /></label><label>物品名称<select name="productId" required></select></label><label>物品数量<input name="quantity" required type="number" min="1" step="1" /></label><label>操作人<input name="operator" required value="陈" /></label><label>备注<input name="note" placeholder="例如：尺码不合适/客户退回" /></label><menu><button class="btn light" value="cancel" type="button" data-close>取消</button><button class="btn primary" value="default">保存</button></menu></form></dialog>
+    <dialog id="productDialog">
+      <form method="dialog" id="productForm" class="dialog-card">
+        <h2 id="productDialogTitle">添加商品</h2>
+        <input type="hidden" name="id" />
+        <label>商品名称<input name="name" required placeholder="例如：腰靠-米白色" /></label>
+        <label>分类<input name="category" required placeholder="例如：腰靠" /></label>
+        <label>单位<input name="unit" required value="个" /></label>
+        <label>单价<input name="price" required type="number" min="0" step="0.01" /></label>
+        <label>当前库存<input name="stock" required type="number" min="0" step="1" /></label>
+        <label>预警库存<input name="warning" required type="number" min="0" step="1" value="10" /></label>
+        <menu><button class="btn light" value="cancel" type="button" data-close>取消</button><button class="btn primary" value="default">保存</button></menu>
+      </form>
+    </dialog>
 
-    <input id="csvFileInput" type="file" accept=".csv,.xlsx,text/csv,application/vnd.openxmlformats-officedocument.spreadsheetml.sheet" hidden />
+    <dialog id="movementDialog">
+      <form method="dialog" id="movementForm" class="dialog-card">
+        <h2 id="movementTitle">添加入库</h2>
+        <input type="hidden" name="type" />
+        <label>商品<select name="productId" required></select></label>
+        <label id="batchLabel">批次号<input name="batch" placeholder="000" /></label>
+        <label id="supplierLabel">供应商<input name="supplier" placeholder="供应商名称" /></label>
+        <label>数量<input name="quantity" required type="number" min="1" step="1" /></label>
+        <label>日期<input name="date" required type="date" /></label>
+        <label>用途/备注<input name="purpose" placeholder="例如：日常销售/补货" /></label>
+        <menu><button class="btn light" value="cancel" type="button" data-close>取消</button><button class="btn primary" value="default">保存</button></menu>
+      </form>
+    </dialog>
+
+    <dialog id="costDialog">
+      <form method="dialog" id="costForm" class="dialog-card">
+        <h2>添加成本</h2>
+        <label>成本类型<select name="type"><option>采购成本</option><option>快递成本</option><option>代发成本</option><option>其他成本</option></select></label>
+        <label>金额<input name="amount" required type="number" min="0" step="0.01" /></label>
+        <label>日期<input name="date" required type="date" /></label>
+        <label>说明<input name="note" placeholder="例如：汽车坐垫单片代发" /></label>
+        <menu><button class="btn light" value="cancel" type="button" data-close>取消</button><button class="btn primary" value="default">保存</button></menu>
+      </form>
+    </dialog>
+
+    <input id="csvFileInput" type="file" accept=".csv,text/csv" hidden />
     <script>
-const STORAGE_KEY = "tmallWarehouseV10";
-const LEGACY_STORAGE_KEYS = ["tmallWarehouseV9", "tmallWarehouseV8", "tmallWarehouseV7", "tmallWarehouseV6"];
+const STORAGE_KEY = "tmallWarehouseV2";
 const LOW_STOCK_DEFAULT = 10;
 const operator = "陈";
-const DEFAULT_CATEGORIES = ["汽车头枕", "腰靠", "护肩套", "坐垫", "方向盘套", "其他"];
-const CHANNELS = { general: "普通渠道商", threeW: "3W品牌渠道", taizhouYiwen: "台州伊文渠道" };
 
 const state = readStore() || createDemoState();
 let activeInventoryFilter = "all";
 let pendingImportType = null;
 let editingProductId = null;
-let editingReturnId = null;
-let editingStockInId = null;
-let editingProfitAdjustId = null;
-
-function normalizeReturnRecord(record) {
-  return {
-    ...record,
-    returnDate: normalizeDate(record.returnDate || record.createdAt || today()),
-    refundCreatedAt: normalizeDate(record.refundCreatedAt || record.createdAt || today()),
-    logisticsCompany: record.logisticsCompany || "-",
-    createdAt: normalizeDate(record.createdAt || record.returnDate || today()),
-  };
-}
-
-function normalizeChannelFunds(value) {
-  const records = value?.records || [];
-  const accounts = value?.accounts || { general: Number(value?.amount || 0), threeW: 0, taizhouYiwen: 0 };
-  return { accounts: { general: Number(accounts.general || 0), threeW: Number(accounts.threeW || 0), taizhouYiwen: Number(accounts.taizhouYiwen || 0) }, records };
-}
-
-function normalizeStockInRecord(record) {
-  return { ...record, price: Number(record?.price ?? 0) };
-}
 
 function readStore() {
   try {
-    const raw = localStorage.getItem(STORAGE_KEY) || LEGACY_STORAGE_KEYS.map((key) => localStorage.getItem(key)).find(Boolean);
-    if (!raw) return null;
-    const data = JSON.parse(raw);
-    return { ...data, stockIns: (data.stockIns || []).map(normalizeStockInRecord), returns: (data.returns || []).map(normalizeReturnRecord), channelFunds: normalizeChannelFunds(data.channelFunds), profitAdjustments: data.profitAdjustments || [] };
+    return JSON.parse(localStorage.getItem(STORAGE_KEY));
   } catch {
     return null;
   }
@@ -370,19 +296,6 @@ function today() {
 
 function monthKey(date = today()) {
   return date.slice(0, 7);
-}
-
-function normalizeDate(value, fallback = today()) {
-  const text = String(value || "").trim();
-  if (!text) return fallback;
-  if (/^\d{4}[-/]\d{1,2}[-/]\d{1,2}$/.test(text)) {
-    const [year, month, day] = text.replaceAll("/", "-").split("-");
-    return `${year}-${month.padStart(2, "0")}-${day.padStart(2, "0")}`;
-  }
-  if (/^\d+(\.\d+)?$/.test(text) && Number(text) > 20000) {
-    return new Date((Number(text) - 25569) * 86400000).toISOString().slice(0, 10);
-  }
-  return text;
 }
 
 function money(value) {
@@ -430,26 +343,12 @@ function createDemoState() {
     { productId: products[10].id, batch: "000", supplier: "-", quantity: 26, date: "2026-04-17" },
     { productId: products[3].id, batch: "000", supplier: "-", quantity: 30, date: "2026-04-01" },
     { productId: products[3].id, batch: "000", supplier: "-", quantity: 30, date: "2026-04-01" },
-  ].map((item) => ({ ...item, price: products.find((product) => product.id === item.productId)?.price || 0, id: uid("in"), operator }));
-
-  const stockOuts = [
-    { productId: products[7].id, quantity: 12, date: "2026-05-02", purpose: "销售出库" },
-    { productId: products[3].id, quantity: 9, date: "2026-05-04", purpose: "销售出库" },
-    { productId: products[11].id, quantity: 7, date: "2026-05-06", purpose: "销售出库" },
-    { productId: products[7].id, quantity: 15, date: "2026-05-09", purpose: "销售出库" },
-    { productId: products[14].id, quantity: 6, date: "2026-05-12", purpose: "销售出库" },
-    { productId: products[3].id, quantity: 11, date: "2026-05-16", purpose: "销售出库" },
-    { productId: products[19].id, quantity: 5, date: "2026-05-20", purpose: "销售出库" },
-    { productId: products[7].id, quantity: 8, date: "2026-05-25", purpose: "销售出库" },
-  ].map((item) => ({ ...item, id: uid("out"), operator }));
+  ].map((item) => ({ ...item, id: uid("in"), operator }));
 
   return {
     products,
     stockIns,
-    stockOuts,
-    returns: [],
-    channelFunds: normalizeChannelFunds(),
-    profitAdjustments: [],
+    stockOuts: [],
     costs: [{ id: uid("cost"), type: "代发成本", amount: 27, date: "2026-04-06", operator, note: "汽车坐垫单片代发" }],
   };
 }
@@ -460,20 +359,6 @@ function byId(id) {
 
 function productAmount(product) {
   return product.price * product.stock;
-}
-
-function stockInPrice(item) {
-  const value = Number(item?.price);
-  return Number.isFinite(value) && value > 0 ? value : Number(byId(item.productId)?.price || 0);
-}
-
-function channelTotal() {
-  const accounts = state.channelFunds?.accounts || {};
-  return Object.keys(CHANNELS).reduce((sum, key) => sum + Number(accounts[key] || 0), 0);
-}
-
-function profitAdjustmentTotal(type, productId = "") {
-  return (state.profitAdjustments || []).filter((item) => item.type === type && (!productId || item.productId === productId)).reduce((sum, item) => sum + Number(item.amount || 0), 0);
 }
 
 function lowProducts() {
@@ -505,7 +390,7 @@ function renderMetrics() {
   const todayOuts = state.stockOuts.filter((item) => item.date === day);
   const monthIns = state.stockIns.filter((item) => monthKey(item.date) === currentMonth);
   const monthOuts = state.stockOuts.filter((item) => monthKey(item.date) === currentMonth);
-  const inAmount = (item) => stockInPrice(item) * item.quantity;
+  const inAmount = (item) => (byId(item.productId)?.price || 0) * item.quantity;
   const outAmount = (item) => (byId(item.productId)?.price || 0) * item.quantity;
   const totalCost = state.costs.reduce((sum, item) => sum + item.amount, 0);
 
@@ -515,11 +400,6 @@ function renderMetrics() {
   updateText("dashInventoryValue", money(inventoryValue));
   updateText("invAmount", money(inventoryValue));
   ["dashWarningCount", "invWarningCount"].forEach((id) => updateText(id, warningCount));
-  updateText("dashChannelFunds", money(channelTotal()));
-  updateText("channelGeneralFunds", money(state.channelFunds?.accounts?.general || 0));
-  updateText("channelThreeWFunds", money(state.channelFunds?.accounts?.threeW || 0));
-  updateText("channelTaizhouFunds", money(state.channelFunds?.accounts?.taizhouYiwen || 0));
-  updateText("dashChannelNote", state.channelFunds?.records?.[0]?.note || "可分别登记渠道金额和备注");
   updateText("todayInQty", todayIns.reduce((s, i) => s + i.quantity, 0));
   updateText("todayOutQty", todayOuts.reduce((s, i) => s + i.quantity, 0));
   updateText("todayInAmount", money(todayIns.reduce((s, i) => s + inAmount(i), 0)));
@@ -536,100 +416,28 @@ function renderMetrics() {
   updateText("inAmountTotal", money(state.stockIns.reduce((s, i) => s + inAmount(i), 0)));
   updateText("outRecordCount", state.stockOuts.length);
   updateText("outQtyTotal", state.stockOuts.reduce((s, i) => s + i.quantity, 0));
-  updateText("returnRecordCount", state.returns.length);
-  updateText("returnQtyTotal", state.returns.reduce((s, i) => s + i.quantity, 0));
-  updateText("returnOrderCount", new Set(state.returns.map((i) => i.orderNo)).size);
   updateText("costTotal", money(totalCost));
   updateText("purchaseCost", money(sumCost("采购成本")));
   updateText("expressCost", money(sumCost("快递成本")));
   updateText("agencyCost", money(sumCost("代发成本")));
   updateText("otherCost", money(sumCost("其他成本")));
-  updateText("profitRevenue", money(totalRevenue()));
-  updateText("profitPurchaseCost", money(totalPurchaseCost()));
-  updateText("profitExpenseCost", money(totalExpenseCost()));
-  updateText("profitNet", money(totalRevenue() - totalPurchaseCost() - totalExpenseCost()));
-  updateText("profitRevenueBase", `自动出库 ${money(autoRevenue())} / 手动 ${money(profitAdjustmentTotal("revenue"))}`);
-  updateText("profitPurchaseBase", `入库成本 ${money(autoPurchaseCost())} / 手动 ${money(profitAdjustmentTotal("purchase"))}`);
-  updateText("profitExpenseBase", `成本登记 ${money(totalCost)} / 手动 ${money(profitAdjustmentTotal("expense"))}`);
+  updateText("reportInQty", state.stockIns.reduce((s, i) => s + i.quantity, 0));
+  updateText("reportOutQty", state.stockOuts.reduce((s, i) => s + i.quantity, 0));
+  updateText("reportInAmount", money(state.stockIns.reduce((s, i) => s + inAmount(i), 0)));
+  updateText("reportCostTotal", money(totalCost));
 }
 
 function sumCost(type) {
   return state.costs.filter((item) => item.type === type).reduce((sum, item) => sum + item.amount, 0);
 }
 
-function autoRevenue() {
-  return state.stockOuts.reduce((sum, item) => sum + item.quantity * (byId(item.productId)?.price || 0), 0);
-}
-
-function autoPurchaseCost() {
-  return state.stockIns.reduce((sum, item) => sum + item.quantity * stockInPrice(item), 0);
-}
-
-function totalRevenue() {
-  return autoRevenue() + profitAdjustmentTotal("revenue");
-}
-
-function totalPurchaseCost() {
-  return autoPurchaseCost() + profitAdjustmentTotal("purchase");
-}
-
-function totalExpenseCost() {
-  return state.costs.reduce((sum, item) => sum + item.amount, 0) + profitAdjustmentTotal("expense");
-}
-
-function baseProductName(name) {
-  return String(name || "").split(/[｜|-]/)[0].trim();
-}
-
-function sortedProducts(items) {
-  return [...items].sort((a, b) => baseProductName(a.name).localeCompare(baseProductName(b.name), "zh-CN") || a.category.localeCompare(b.category, "zh-CN") || a.name.localeCompare(b.name, "zh-CN"));
-}
-
-function productOptionsHtml(selectedId = "") {
-  const groups = new Map();
-  sortedProducts(state.products).forEach((product) => {
-    const groupName = baseProductName(product.name) || "其他商品";
-    if (!groups.has(groupName)) groups.set(groupName, []);
-    groups.get(groupName).push(product);
-  });
-  return [...groups.entries()].map(([group, products]) => `<optgroup label="${group}">${products.map((product) => `<option value="${product.id}" ${product.id === selectedId ? "selected" : ""}>${product.name}</option>`).join("")}</optgroup>`).join("");
-}
-
-function categoryList() {
-  return [...new Set([...DEFAULT_CATEGORIES, ...state.products.map((product) => product.category).filter(Boolean)])];
-}
-
-function categoryMatches(product, selectId) {
-  const select = document.getElementById(selectId);
-  return !select || select.value === "all" || product.category === select.value;
-}
-
-function renderCategorySelects() {
-  const options = categoryList().map((category) => `<option value="${category}">${category}</option>`).join("");
-  ["inventoryCategoryFilter", "stockInCategoryFilter", "stockOutCategoryFilter", "productCategoryFilter"].forEach((id) => {
-    const select = document.getElementById(id);
-    if (!select) return;
-    const value = select.value || "all";
-    select.innerHTML = `<option value="all">全部规格分类</option>${options}`;
-    select.value = categoryList().includes(value) ? value : "all";
-  });
-}
-
-function fillProductCategorySelect(value = "") {
-  const select = document.querySelector('#productForm select[name="category"]');
-  if (!select) return;
-  const categories = categoryList();
-  select.innerHTML = categories.map((category) => `<option value="${category}">${category}</option>`).join("");
-  select.value = categories.includes(value) ? value : categories[0];
-}
-
-function filteredProducts(inputId = "inventorySearch", categorySelectId = "") {
+function filteredProducts(inputId = "inventorySearch") {
   const keyword = document.getElementById(inputId).value.trim().toLowerCase();
-  return sortedProducts(state.products.filter((product) => {
+  return state.products.filter((product) => {
     const matchKeyword = !keyword || [product.name, product.code, product.category].some((value) => value.toLowerCase().includes(keyword));
     const matchFilter = activeInventoryFilter === "all" || (activeInventoryFilter === "low" ? product.stock <= product.warning : product.stock > product.warning);
-    return matchKeyword && matchFilter && categoryMatches(product, categorySelectId);
-  }));
+    return matchKeyword && matchFilter;
+  });
 }
 
 function renderWarnings() {
@@ -642,27 +450,27 @@ function renderWarnings() {
 
 function renderInventory() {
   const body = document.getElementById("inventoryBody");
-  body.innerHTML = filteredProducts("inventorySearch", "inventoryCategoryFilter").map((product) => `
+  body.innerHTML = filteredProducts("inventorySearch").map((product) => `
     <tr>
-      <td><span class="product-title"><strong>${product.name}</strong><small>${product.code} · 安全库存 ${product.warning}</small></span></td>
-      <td><span class="cost-chip">${product.category}</span></td>
+      <td><strong>${product.name}</strong></td>
+      <td>${product.category}</td>
       <td>${product.unit}</td>
       <td class="money">${money(product.price)}</td>
       <td><span class="stock-cell"><b>${product.stock}</b><span class="stock-bar"><span style="width:${Math.min(100, product.stock * 2)}%"></span></span></span></td>
       <td class="money">${money(productAmount(product))}</td>
-      <td><span class="badge ${product.stock <= product.warning ? "low" : "ok"}">${product.stock <= product.warning ? "需补货" : "库存健康"}</span></td>
-      <td><span class="action-row"><button class="link-btn" data-adjust="${product.id}">补货</button><button class="link-btn" data-detail="${product.id}">详情</button></span></td>
+      <td><span class="badge ${product.stock <= product.warning ? "low" : "ok"}">${product.stock <= product.warning ? "库存不足" : "库存正常"}</span></td>
+      <td><button class="link-btn" data-adjust="${product.id}">✎需补货 调整</button><button class="link-btn" data-detail="${product.id}">详情</button></td>
     </tr>`).join("");
 }
 
 function renderProducts() {
   const keyword = document.getElementById("productSearch").value.trim().toLowerCase();
-  const rows = sortedProducts(state.products.filter((product) => (!keyword || [product.name, product.code, product.category].some((value) => value.toLowerCase().includes(keyword))) && categoryMatches(product, "productCategoryFilter")));
+  const rows = state.products.filter((product) => !keyword || [product.name, product.code, product.category].some((value) => value.toLowerCase().includes(keyword)));
   document.getElementById("productBody").innerHTML = rows.map((product) => `
     <tr>
-      <td><span class="product-title"><strong>${product.name}</strong><small>${product.code} · 预警 ${product.warning}</small></span></td><td><span class="cost-chip">${product.category}</span></td><td>${product.unit}</td><td class="money">${money(product.price)}</td>
+      <td><strong>${product.name}</strong></td><td>${product.category}</td><td>${product.unit}</td><td class="money">${money(product.price)}</td>
       <td><span class="badge ${product.stock <= product.warning ? "low" : "ok"}">${product.stock}</span></td><td><span class="badge ok">启用</span></td>
-      <td><span class="action-row"><button class="link-btn" data-cost-product="${product.id}">成本</button><button class="link-btn" data-edit-product="${product.id}">编辑</button><button class="delete-btn" data-delete-product="${product.id}">删除</button></span></td>
+      <td><button class="link-btn" data-cost-product="${product.id}">$</button><button class="link-btn" data-edit-product="${product.id}">✎</button><button class="delete-btn" data-delete-product="${product.id}">▢</button></td>
     </tr>`).join("");
 }
 
@@ -672,79 +480,34 @@ function renderStockIns() {
   const end = document.getElementById("stockInEnd").value;
   const rows = recordsInRange(state.stockIns, start, end).filter((item) => {
     const product = byId(item.productId);
-    return product && (!keyword || product.name.toLowerCase().includes(keyword) || product.category.toLowerCase().includes(keyword) || String(item.purpose || "").toLowerCase().includes(keyword)) && categoryMatches(product, "stockInCategoryFilter");
+    return !keyword || item.batch.toLowerCase().includes(keyword) || product?.name.toLowerCase().includes(keyword);
   });
   document.getElementById("stockInBody").innerHTML = rows.map((item) => {
     const product = byId(item.productId);
-    return `<tr><td><input class="stock-in-check" type="checkbox" data-id="${item.id}" /></td><td>${product?.name || "-"}</td><td>${item.supplier || "-"}</td><td>${item.quantity}</td><td>${money(stockInPrice(item))}</td><td>${money(stockInPrice(item) * item.quantity)}</td><td>${item.date}</td><td>${item.operator}</td><td>${item.purpose || "-"}</td><td><span class="action-row"><button class="link-btn" data-edit-in="${item.id}">编辑</button><button class="delete-btn" data-delete-in="${item.id}">删除</button></span></td></tr>`;
+    return `<tr><td><input type="checkbox" /></td><td>${item.batch || "000"}</td><td>${product?.name || "-"}</td><td>${item.supplier || "-"}</td><td>${item.quantity}</td><td>${money(product?.price || 0)}</td><td>${money((product?.price || 0) * item.quantity)}</td><td>${item.date}</td><td>${item.operator}</td><td><button class="delete-btn" data-delete-in="${item.id}">▢</button></td></tr>`;
   }).join("");
-  const selectAll = document.getElementById("stockInSelectAll");
-  if (selectAll) selectAll.checked = false;
 }
 
 function renderStockOuts() {
   const keyword = document.getElementById("stockOutSearch").value.trim().toLowerCase();
   const start = document.getElementById("stockOutStart").value;
   const end = document.getElementById("stockOutEnd").value;
-  const rows = recordsInRange(state.stockOuts, start, end).filter((item) => {
-    const product = byId(item.productId);
-    return product && (!keyword || product.name.toLowerCase().includes(keyword) || product.category.toLowerCase().includes(keyword)) && categoryMatches(product, "stockOutCategoryFilter");
-  });
-  document.getElementById("stockOutBody").innerHTML = rows.length ? rows.map((item) => `<tr><td><input type="checkbox" /></td><td>${item.date}</td><td>${byId(item.productId)?.name || "-"}</td><td>${item.quantity}</td><td>${item.purpose || "销售出库"}</td><td><button class="delete-btn" data-delete-out="${item.id}">删除</button></td></tr>`).join("") : `<tr><td colspan="6" style="text-align:center;color:#64748b;height:86px">暂无数据</td></tr>`;
-}
-
-function renderReturns() {
-  const keyword = document.getElementById("returnSearch").value.trim().toLowerCase();
-  const start = document.getElementById("returnStart").value;
-  const end = document.getElementById("returnEnd").value;
-  const rows = state.returns.filter((item) => {
-    const product = byId(item.productId);
-    const matchDate = (!start || item.returnDate >= start) && (!end || item.returnDate <= end);
-    const matchKeyword = !keyword || [item.orderNo, item.trackingNo, item.logisticsCompany, product?.name, item.productName, item.operator, item.note].some((value) => String(value || "").toLowerCase().includes(keyword));
-    return matchDate && matchKeyword;
-  });
-  document.getElementById("returnBody").innerHTML = rows.length ? rows.map((item) => {
-    const product = byId(item.productId);
-    return `<tr><td>${item.returnDate}</td><td>${item.refundCreatedAt}</td><td>${item.orderNo}</td><td>${item.logisticsCompany || "-"}</td><td>${item.trackingNo}</td><td>${product?.name || item.productName || "-"}</td><td>${item.quantity}</td><td>${item.operator}</td><td>${item.note || "-"}</td><td><span class="action-row"><button class="link-btn" data-edit-return="${item.id}">编辑</button><button class="delete-btn" data-delete-return="${item.id}">删除</button></span></td></tr>`;
-  }).join("") : `<tr><td colspan="10" style="text-align:center;color:#64748b;height:86px">暂无退货入库记录</td></tr>`;
+  const rows = recordsInRange(state.stockOuts, start, end).filter((item) => !keyword || byId(item.productId)?.name.toLowerCase().includes(keyword));
+  document.getElementById("stockOutBody").innerHTML = rows.length ? rows.map((item) => `<tr><td><input type="checkbox" /></td><td>${item.date}</td><td>${byId(item.productId)?.name || "-"}</td><td>${item.quantity}</td><td>${item.purpose || "销售出库"}</td><td><button class="delete-btn" data-delete-out="${item.id}">▢</button></td></tr>`).join("") : `<tr><td colspan="6" style="text-align:center;color:#64748b;height:86px">暂无数据</td></tr>`;
 }
 
 function renderCosts() {
   const type = document.getElementById("costTypeFilter").value;
   const rows = state.costs.filter((item) => type === "all" || item.type === type);
-  document.getElementById("costBody").innerHTML = rows.map((item) => `<tr><td><input type="checkbox" /></td><td><span class="cost-chip">${item.type}</span></td><td class="red-text">${money(item.amount)}</td><td>${item.date}</td><td>${item.operator}</td><td>${item.note || "-"}</td><td><button class="delete-btn" data-delete-cost="${item.id}">删除</button></td></tr>`).join("");
-}
-
-function renderProfits() {
-  const rows = sortedProducts(state.products).map((product) => {
-    const outQty = state.stockOuts.filter((item) => item.productId === product.id).reduce((sum, item) => sum + item.quantity, 0);
-    const inItems = state.stockIns.filter((item) => item.productId === product.id);
-    const inQty = inItems.reduce((sum, item) => sum + item.quantity, 0);
-    const returnQty = state.returns.filter((item) => item.productId === product.id).reduce((sum, item) => sum + item.quantity, 0);
-    const manualRevenue = profitAdjustmentTotal("revenue", product.id);
-    const manualPurchase = profitAdjustmentTotal("purchase", product.id);
-    const manualExpense = profitAdjustmentTotal("expense", product.id);
-    const revenue = outQty * product.price + manualRevenue;
-    const purchase = inItems.reduce((sum, item) => sum + item.quantity * stockInPrice(item), 0) + manualPurchase;
-    return { product, outQty, inQty, returnQty, revenue, purchase, gross: revenue - purchase - manualExpense };
-  }).filter((row) => row.outQty || row.inQty || row.returnQty || row.revenue || row.purchase);
-  const body = document.getElementById("profitBody");
-  if (!body) return;
-  body.innerHTML = rows.length ? rows.map((row) => `<tr><td>${row.product.name}</td><td>${row.outQty}</td><td class="money">${money(row.revenue)}</td><td>${row.inQty}</td><td class="money">${money(row.purchase)}</td><td>${row.returnQty}</td><td class="${row.gross >= 0 ? "green-text" : "red-text"}">${money(row.gross)}</td><td><button class="link-btn" data-profit-product="${row.product.id}">登记调整</button></td></tr>`).join("") : `<tr><td colspan="8" style="text-align:center;color:#64748b;height:86px">暂无利润数据</td></tr>`;
-  renderProfitAdjustments();
-}
-
-function renderProfitAdjustments() {
-  const body = document.getElementById("profitAdjustBody");
-  if (!body) return;
-  const typeNames = { revenue: "销售收入调整", purchase: "入库采购成本调整", expense: "费用成本调整" };
-  const rows = state.profitAdjustments || [];
-  body.innerHTML = rows.length ? rows.map((item) => `<tr><td><span class="cost-chip">${typeNames[item.type] || item.type}</span></td><td class="money">${money(item.amount)}</td><td>${item.date}</td><td>${byId(item.productId)?.name || "不关联商品"}</td><td>${item.note || "-"}</td><td><span class="action-row"><button class="link-btn" data-edit-profit="${item.id}">编辑</button><button class="delete-btn" data-delete-profit="${item.id}">删除</button></span></td></tr>`).join("") : `<tr><td colspan="6" style="text-align:center;color:#64748b;height:86px">暂无利润调整记录</td></tr>`;
+  document.getElementById("costBody").innerHTML = rows.map((item) => `<tr><td><input type="checkbox" /></td><td><span class="cost-chip">${item.type}</span></td><td class="red-text">${money(item.amount)}</td><td>${item.date}</td><td>${item.operator}</td><td>${item.note || "-"}</td><td><button class="delete-btn" data-delete-cost="${item.id}">▢</button></td></tr>`).join("");
 }
 
 function renderCharts() {
-  if (document.getElementById("reportTopChart")) renderReportTopChart();
-  if (document.getElementById("trendCanvas")) drawTrend();
+  renderBarChart("valueTopChart", state.products.slice().sort((a, b) => productAmount(b) - productAmount(a)).slice(0, 5).map((p) => ({ label: p.name, value: productAmount(p) })), money);
+  const outGroups = groupOuts();
+  renderBarChart("outQtyTopChart", outGroups.slice(0, 5).map((x) => ({ label: x.name, value: x.qty })), (v) => v || "暂无数据");
+  renderBarChart("outAmountTopChart", outGroups.slice(0, 5).map((x) => ({ label: x.name, value: x.amount })), money);
+  drawTrend();
 }
 
 function renderBarChart(id, rows, formatter) {
@@ -759,9 +522,9 @@ function renderBarChart(id, rows, formatter) {
   root.innerHTML = rows.map((row) => `<div class="bar-row"><span class="bar-label" title="${row.label}">${row.label}</span><span class="bar-track"><span class="bar-fill" style="width:${(row.value / max) * 100}%"></span></span><span class="bar-value">${formatter(row.value)}</span></div>`).join("");
 }
 
-function groupRecords(records) {
+function groupOuts() {
   const map = new Map();
-  records.forEach((item) => {
+  state.stockOuts.forEach((item) => {
     const product = byId(item.productId);
     const current = map.get(item.productId) || { name: product?.name || "-", qty: 0, amount: 0 };
     current.qty += item.quantity;
@@ -771,97 +534,37 @@ function groupRecords(records) {
   return [...map.values()].sort((a, b) => b.qty - a.qty);
 }
 
-function groupOuts() {
-  return groupRecords(state.stockOuts);
-}
-
-function renderReportTopChart() {
-  const root = document.getElementById("reportTopChart");
-  const outs = groupOuts().slice(0, 5);
-  if (!outs.length) {
-    root.className = "empty-frame";
-    root.innerHTML = "";
-    return;
-  }
-  const max = Math.max(1, ...outs.map((item) => item.qty));
-  root.className = "top-frame outbound-only";
-  root.innerHTML = outs.map((item, index) => `<div class="top-row"><span title="${item.name}">${index + 1}. ${item.name}</span><i style="width:${(item.qty / max) * 100}%"></i><em>${item.qty}</em></div>`).join("");
-}
-
 function drawTrend() {
   const canvas = document.getElementById("trendCanvas");
   const ctx = canvas.getContext("2d");
-  const width = canvas.width;
-  const height = canvas.height;
-  ctx.clearRect(0, 0, width, height);
-  const padding = { left: 54, right: 28, top: 24, bottom: 42 };
-  const days = Array.from({ length: 31 }, (_, index) => `2026-05-${String(index + 1).padStart(2, "0")}`);
-  const values = days.map((date) => state.stockOuts.filter((item) => item.date === date).reduce((sum, item) => sum + item.quantity, 0));
-  const max = Math.max(8, ...values);
-  const chartWidth = width - padding.left - padding.right;
-  const chartHeight = height - padding.top - padding.bottom;
-  const points = values.map((value, index) => ({
-    x: padding.left + (chartWidth / (days.length - 1)) * index,
-    y: padding.top + chartHeight - (value / max) * chartHeight,
-    value,
-  }));
-
-  ctx.strokeStyle = "#dbe7f3";
-  ctx.lineWidth = 1;
-  ctx.setLineDash([5, 7]);
-  for (let i = 0; i <= 4; i += 1) {
-    const y = padding.top + (chartHeight / 4) * i;
-    ctx.beginPath(); ctx.moveTo(padding.left, y); ctx.lineTo(width - padding.right, y); ctx.stroke();
+  ctx.clearRect(0, 0, canvas.width, canvas.height);
+  ctx.strokeStyle = "#cbd5e1";
+  ctx.setLineDash([3, 3]);
+  for (let i = 0; i < 6; i += 1) {
+    const y = 20 + i * 40;
+    ctx.beginPath(); ctx.moveTo(45, y); ctx.lineTo(canvas.width - 20, y); ctx.stroke();
   }
   ctx.setLineDash([]);
-
-  const gradient = ctx.createLinearGradient(0, padding.top, 0, height - padding.bottom);
-  gradient.addColorStop(0, "rgba(239, 68, 68, 0.22)");
-  gradient.addColorStop(1, "rgba(239, 68, 68, 0.02)");
-  ctx.beginPath();
-  points.forEach((point, index) => index ? ctx.lineTo(point.x, point.y) : ctx.moveTo(point.x, point.y));
-  ctx.lineTo(width - padding.right, height - padding.bottom);
-  ctx.lineTo(padding.left, height - padding.bottom);
-  ctx.closePath();
-  ctx.fillStyle = gradient;
-  ctx.fill();
-
-  ctx.beginPath();
-  points.forEach((point, index) => index ? ctx.lineTo(point.x, point.y) : ctx.moveTo(point.x, point.y));
+  ctx.strokeStyle = "#64748b";
+  ctx.beginPath(); ctx.moveTo(45, 220); ctx.lineTo(canvas.width - 20, 220); ctx.stroke();
   ctx.strokeStyle = "#ef4444";
-  ctx.lineWidth = 3;
-  ctx.stroke();
-
-  points.forEach((point) => {
-    if (!point.value) return;
-    ctx.beginPath();
-    ctx.arc(point.x, point.y, 4, 0, Math.PI * 2);
-    ctx.fillStyle = "#fff";
-    ctx.fill();
-    ctx.strokeStyle = "#ef4444";
-    ctx.lineWidth = 2;
-    ctx.stroke();
-  });
-
+  ctx.beginPath(); ctx.moveTo(45, 220); ctx.lineTo(520, 220); ctx.stroke();
   ctx.fillStyle = "#64748b";
   ctx.font = "14px sans-serif";
-  for (let i = 0; i < days.length; i += 3) ctx.fillText(days[i].slice(5), points[i].x - 14, height - 16);
-  ctx.fillStyle = "#ef4444";
-  ctx.fillText("● 出库量", width / 2 - 28, height - 16);
+  for (let i = 0; i < 31; i += 2) ctx.fillText(`05-${String(i + 1).padStart(2, "0")}`, 45 + i * 42, 242);
+  ctx.fillStyle = "#10b981"; ctx.fillText("● 入库", canvas.width / 2 - 40, 258);
+  ctx.fillStyle = "#ef4444"; ctx.fillText("● 出库", canvas.width / 2 + 28, 258);
 }
 
 function render() {
   saveStore();
-  renderCategorySelects();
   renderMetrics();
   renderWarnings();
   renderInventory();
   renderProducts();
   renderStockIns();
   renderStockOuts();
-  renderReturns();
   renderCosts();
-  renderProfits();
   renderCharts();
 }
 
@@ -884,7 +587,7 @@ function openProductDialog(product = null) {
   form.reset();
   form.elements.id.value = product?.id || "";
   form.elements.name.value = product?.name || "";
-  fillProductCategorySelect(product?.category || "");
+  form.elements.category.value = product?.category || "";
   form.elements.unit.value = product?.unit || "个";
   form.elements.price.value = product?.price || "";
   form.elements.stock.value = product?.stock || 0;
@@ -892,217 +595,32 @@ function openProductDialog(product = null) {
   document.getElementById("productDialog").showModal();
 }
 
-function openMovementDialog(type, productId = "", record = null) {
+function openMovementDialog(type, productId = "") {
   const form = document.getElementById("movementForm");
   form.reset();
-  editingStockInId = type === "in" && record ? record.id : null;
-  document.getElementById("movementTitle").textContent = record ? "编辑入库" : type === "in" ? "添加入库" : "添加出库";
-  form.elements.id.value = record?.id || "";
+  document.getElementById("movementTitle").textContent = type === "in" ? "添加入库" : "添加出库";
   form.elements.type.value = type;
-  form.elements.date.value = record?.date || today();
-  form.elements.productId.innerHTML = productOptionsHtml(productId || record?.productId || "");
-  form.elements.productId.value = productId || record?.productId || sortedProducts(state.products)[0]?.id || "";
-  form.elements.quantity.value = record?.quantity || "";
-  form.elements.batch.value = record?.batch || "000";
-  form.elements.supplier.value = record?.supplier || "";
-  form.elements.purpose.value = record?.purpose || "";
-  form.elements.price.value = record ? stockInPrice(record) : byId(form.elements.productId.value)?.price || "";
+  form.elements.date.value = today();
+  form.elements.productId.innerHTML = state.products.map((product) => `<option value="${product.id}">${product.name}</option>`).join("");
+  form.elements.productId.value = productId || state.products[0]?.id || "";
   document.getElementById("batchLabel").style.display = type === "in" ? "grid" : "none";
   document.getElementById("supplierLabel").style.display = type === "in" ? "grid" : "none";
-  document.getElementById("movementPriceLabel").style.display = type === "in" ? "grid" : "none";
   document.getElementById("movementDialog").showModal();
-}
-
-function openReturnDialog(record = null) {
-  editingReturnId = record?.id || null;
-  const form = document.getElementById("returnForm");
-  form.reset();
-  document.getElementById("returnDialogTitle").textContent = record ? "编辑退货入库" : "添加退货入库";
-  form.elements.id.value = record?.id || "";
-  form.elements.returnDate.value = record?.returnDate || today();
-  form.elements.refundCreatedAt.value = record?.refundCreatedAt || today();
-  form.elements.orderNo.value = record?.orderNo || "";
-  form.elements.logisticsCompany.value = record?.logisticsCompany || "";
-  form.elements.trackingNo.value = record?.trackingNo || "";
-  form.elements.operator.value = record?.operator || operator;
-  form.elements.note.value = record?.note || "";
-  form.elements.quantity.value = record?.quantity || "";
-  form.elements.productId.innerHTML = productOptionsHtml(record?.productId || "");
-  form.elements.productId.value = record?.productId || sortedProducts(state.products)[0]?.id || "";
-  document.getElementById("returnDialog").showModal();
 }
 
 function parseCsv(text) {
   return text.replace(/^\uFEFF/, "").split(/\r?\n/).map((line) => line.split(",").map((cell) => cell.trim())).filter((row) => row.length > 1 && row.some(Boolean));
 }
 
-
-
-function decodeXml(value = "") {
-  return value.replaceAll("&lt;", "<").replaceAll("&gt;", ">").replaceAll("&amp;", "&").replaceAll("&quot;", '"').replaceAll("&apos;", "'");
-}
-
-function columnIndex(cellRef = "A") {
-  const letters = String(cellRef).match(/[A-Z]+/)?.[0] || "A";
-  return [...letters].reduce((sum, letter) => sum * 26 + letter.charCodeAt(0) - 64, 0) - 1;
-}
-
-async function inflateRaw(bytes) {
-  if (typeof DecompressionStream === "undefined") throw new Error("当前浏览器不支持读取压缩的 XLSX，请另存为 CSV 后导入。");
-  const stream = new Blob([bytes]).stream().pipeThrough(new DecompressionStream("deflate-raw"));
-  return new Uint8Array(await new Response(stream).arrayBuffer());
-}
-
-async function unzipEntries(buffer) {
-  const bytes = new Uint8Array(buffer);
-  const view = new DataView(buffer);
-  let eocd = -1;
-  for (let i = bytes.length - 22; i >= Math.max(0, bytes.length - 65558); i -= 1) {
-    if (view.getUint32(i, true) === 0x06054b50) { eocd = i; break; }
-  }
-  if (eocd < 0) throw new Error("XLSX 文件结构不完整，请确认文件未损坏。");
-  const total = view.getUint16(eocd + 10, true);
-  let offset = view.getUint32(eocd + 16, true);
-  const entries = new Map();
-  const decoder = new TextDecoder();
-  for (let i = 0; i < total; i += 1) {
-    if (view.getUint32(offset, true) !== 0x02014b50) break;
-    const method = view.getUint16(offset + 10, true);
-    const compressedSize = view.getUint32(offset + 20, true);
-    const nameLength = view.getUint16(offset + 28, true);
-    const extraLength = view.getUint16(offset + 30, true);
-    const commentLength = view.getUint16(offset + 32, true);
-    const localOffset = view.getUint32(offset + 42, true);
-    const name = decoder.decode(bytes.slice(offset + 46, offset + 46 + nameLength));
-    const localNameLength = view.getUint16(localOffset + 26, true);
-    const localExtraLength = view.getUint16(localOffset + 28, true);
-    const dataStart = localOffset + 30 + localNameLength + localExtraLength;
-    const compressed = bytes.slice(dataStart, dataStart + compressedSize);
-    const data = method === 0 ? compressed : await inflateRaw(compressed);
-    entries.set(name, decoder.decode(data));
-    offset += 46 + nameLength + extraLength + commentLength;
-  }
-  return entries;
-}
-
-function parseSharedStrings(xml = "") {
-  return [...xml.matchAll(/<si[^>]*>([\s\S]*?)<\/si>/g)].map((match) => decodeXml([...match[1].matchAll(/<t[^>]*>([\s\S]*?)<\/t>/g)].map((part) => part[1]).join("")));
-}
-
-async function parseXlsx(file) {
-  const entries = await unzipEntries(await file.arrayBuffer());
-  const shared = parseSharedStrings(entries.get("xl/sharedStrings.xml") || "");
-  const sheetName = [...entries.keys()].find((name) => /^xl\/worksheets\/sheet\d+\.xml$/.test(name));
-  const sheet = entries.get(sheetName || "") || "";
-  const rows = [];
-  for (const rowMatch of sheet.matchAll(/<row[^>]*>([\s\S]*?)<\/row>/g)) {
-    const row = [];
-    for (const cellMatch of rowMatch[1].matchAll(/<c([^>]*)>([\s\S]*?)<\/c>/g)) {
-      const attrs = cellMatch[1];
-      const body = cellMatch[2];
-      const ref = attrs.match(/r="([A-Z]+)\d+"/)?.[1] || "A";
-      const type = attrs.match(/t="([^"]+)"/)?.[1] || "";
-      const raw = body.match(/<v[^>]*>([\s\S]*?)<\/v>/)?.[1] || body.match(/<t[^>]*>([\s\S]*?)<\/t>/)?.[1] || "";
-      const value = type === "s" ? (shared[Number(raw)] || "") : decodeXml(raw);
-      row[columnIndex(ref)] = value;
-    }
-    if (row.some((cell) => String(cell || "").trim())) rows.push(row.map((cell) => String(cell || "").trim()));
-  }
-  return rows;
-}
-
-async function parseImportFile(file) {
-  return file.name.toLowerCase().endsWith(".xlsx") ? parseXlsx(file) : parseCsv(await file.text());
-}
-
-function findProductByName(name) {
-  const keyword = String(name || "").trim();
-  return state.products.find((item) => item.name === keyword || item.code === keyword) || state.products.find((item) => item.name.includes(keyword));
-}
-
-function showProductDetail(productId) {
-  const product = byId(productId);
-  if (!product) return;
-  const inbound = state.stockIns.filter((item) => item.productId === productId).reduce((sum, item) => sum + item.quantity, 0);
-  const outbound = state.stockOuts.filter((item) => item.productId === productId).reduce((sum, item) => sum + item.quantity, 0);
-  alert(`商品详情
-
-名称：${product.name}
-编码：${product.code}
-规格分类：${product.category}
-单价：${money(product.price)}
-当前库存：${product.stock}${product.unit}
-安全库存：${product.warning}${product.unit}
-库存金额：${money(productAmount(product))}
-累计入库：${inbound}${product.unit}
-累计出库：${outbound}${product.unit}`);
-}
-
-function openCostDialogForProduct(productId) {
-  const product = byId(productId);
-  const form = document.getElementById("costForm");
-  form.reset();
-  form.elements.type.value = "采购成本";
-  form.elements.amount.value = product ? product.price : "";
-  form.elements.date.value = today();
-  form.elements.note.value = product ? `${product.name} 成本登记` : "";
-  document.getElementById("costDialog").showModal();
-}
-
-function openProfitAdjustDialog(record = null, productId = "") {
-  const form = document.getElementById("profitAdjustForm");
-  form.reset();
-  editingProfitAdjustId = record?.id || null;
-  document.getElementById("profitAdjustTitle").textContent = record ? "编辑利润调整" : "登记利润调整";
-  form.elements.id.value = record?.id || "";
-  form.elements.type.value = record?.type || "revenue";
-  form.elements.productId.innerHTML = `<option value="">不关联商品</option>${productOptionsHtml(record?.productId || productId)}`;
-  form.elements.productId.value = record?.productId || productId || "";
-  form.elements.amount.value = record?.amount ?? "";
-  form.elements.date.value = record?.date || today();
-  form.elements.note.value = record?.note || "";
-  document.getElementById("profitAdjustDialog").showModal();
-}
-
 document.querySelectorAll(".nav-item").forEach((item) => item.addEventListener("click", () => setView(item.dataset.view)));
 document.querySelectorAll("[data-close]").forEach((button) => button.addEventListener("click", () => button.closest("dialog").close()));
-document.querySelectorAll("#inventorySearch,#inventoryCategoryFilter,#productSearch,#productCategoryFilter,#stockInSearch,#stockInCategoryFilter,#stockInStart,#stockInEnd,#stockOutSearch,#stockOutCategoryFilter,#stockOutStart,#stockOutEnd,#returnSearch,#returnStart,#returnEnd,#costTypeFilter").forEach((el) => el.addEventListener("input", render));
+document.querySelectorAll("#inventorySearch,#productSearch,#stockInSearch,#stockInStart,#stockInEnd,#stockOutSearch,#stockOutStart,#stockOutEnd,#costTypeFilter").forEach((el) => el.addEventListener("input", render));
 document.querySelectorAll(".tabs .tab[data-filter]").forEach((tab) => tab.addEventListener("click", () => { activeInventoryFilter = tab.dataset.filter; document.querySelectorAll(".tabs .tab[data-filter]").forEach((x) => x.classList.toggle("active", x === tab)); renderInventory(); }));
 
 document.getElementById("addProductBtn").addEventListener("click", () => openProductDialog());
-document.getElementById("stockInSelectAll").addEventListener("change", (event) => document.querySelectorAll(".stock-in-check").forEach((checkbox) => { checkbox.checked = event.target.checked; }));
-document.getElementById("importProductsBtn").addEventListener("click", () => { pendingImportType = "products"; document.getElementById("csvFileInput").click(); });
 document.getElementById("addStockInBtn").addEventListener("click", () => openMovementDialog("in"));
 document.getElementById("addStockOutBtn").addEventListener("click", () => openMovementDialog("out"));
-document.getElementById("addReturnBtn").addEventListener("click", openReturnDialog);
 document.getElementById("addCostBtn").addEventListener("click", () => { document.getElementById("costForm").reset(); document.getElementById("costForm").elements.date.value = today(); document.getElementById("costDialog").showModal(); });
-document.getElementById("addProfitAdjustBtn").addEventListener("click", () => openProfitAdjustDialog());
-document.querySelector('#movementForm select[name="productId"]').addEventListener("change", (event) => { const form = document.getElementById("movementForm"); if (form.elements.type.value === "in") form.elements.price.value = byId(event.target.value)?.price || ""; });
-
-document.getElementById("channelForm").addEventListener("submit", (event) => {
-  event.preventDefault();
-  const form = event.currentTarget;
-  const amount = Number(form.elements.amount.value || 0);
-  const mode = form.elements.mode.value;
-  const channel = form.elements.channel.value;
-  state.channelFunds = normalizeChannelFunds(state.channelFunds);
-  const before = state.channelFunds.accounts[channel] || 0;
-  const after = mode === "set" ? amount : before + amount;
-  state.channelFunds.accounts[channel] = after;
-  state.channelFunds.records.unshift({ id: uid("fund"), channel, channelName: CHANNELS[channel], mode, amount, before, after, note: form.elements.note.value.trim(), date: today(), operator });
-  document.getElementById("channelDialog").close();
-  render();
-});
-
-document.getElementById("profitAdjustForm").addEventListener("submit", (event) => {
-  event.preventDefault();
-  const form = event.currentTarget;
-  const record = { id: editingProfitAdjustId || uid("profit"), type: form.elements.type.value, productId: form.elements.productId.value, amount: Number(form.elements.amount.value || 0), date: normalizeDate(form.elements.date.value), note: form.elements.note.value.trim(), operator };
-  if (editingProfitAdjustId) state.profitAdjustments = state.profitAdjustments.map((item) => item.id === editingProfitAdjustId ? record : item); else state.profitAdjustments.unshift(record);
-  editingProfitAdjustId = null;
-  document.getElementById("profitAdjustDialog").close();
-  render();
-});
 
 document.getElementById("productForm").addEventListener("submit", (event) => {
   event.preventDefault();
@@ -1121,52 +639,13 @@ document.getElementById("movementForm").addEventListener("submit", (event) => {
   if (!product || quantity <= 0) return;
   if (form.elements.type.value === "out" && quantity > product.stock) return alert("出库数量不能超过当前库存。");
   if (form.elements.type.value === "in") {
-    const previous = editingStockInId ? state.stockIns.find((item) => item.id === editingStockInId) : null;
-    if (previous) {
-      const oldProduct = byId(previous.productId);
-      if (oldProduct) oldProduct.stock = Math.max(0, oldProduct.stock - previous.quantity);
-    }
     product.stock += quantity;
-    const record = { id: editingStockInId || uid("in"), productId: product.id, batch: form.elements.batch.value || "000", supplier: form.elements.supplier.value || "-", price: Number(form.elements.price.value || product.price || 0), quantity, date: normalizeDate(form.elements.date.value), operator, purpose: form.elements.purpose.value.trim() };
-    if (editingStockInId) state.stockIns = state.stockIns.map((item) => item.id === editingStockInId ? record : item); else state.stockIns.unshift(record);
-    editingStockInId = null;
+    state.stockIns.unshift({ id: uid("in"), productId: product.id, batch: form.elements.batch.value || "000", supplier: form.elements.supplier.value || "-", quantity, date: form.elements.date.value, operator, purpose: form.elements.purpose.value });
   } else {
     product.stock -= quantity;
-    state.stockOuts.unshift({ id: uid("out"), productId: product.id, quantity, date: normalizeDate(form.elements.date.value), operator, purpose: form.elements.purpose.value || "销售出库" });
+    state.stockOuts.unshift({ id: uid("out"), productId: product.id, quantity, date: form.elements.date.value, operator, purpose: form.elements.purpose.value || "销售出库" });
   }
   document.getElementById("movementDialog").close();
-  render();
-});
-
-document.getElementById("returnForm").addEventListener("submit", (event) => {
-  event.preventDefault();
-  const form = event.currentTarget;
-  const product = byId(form.elements.productId.value);
-  const quantity = Number.parseInt(form.elements.quantity.value, 10);
-  if (!product || quantity <= 0) return;
-  const previous = editingReturnId ? state.returns.find((item) => item.id === editingReturnId) : null;
-  if (previous) {
-    const oldProduct = byId(previous.productId);
-    if (oldProduct) oldProduct.stock = Math.max(0, oldProduct.stock - previous.quantity);
-  }
-  product.stock += quantity;
-  const record = normalizeReturnRecord({
-    id: editingReturnId || uid("ret"),
-    orderNo: form.elements.orderNo.value.trim(),
-    trackingNo: form.elements.trackingNo.value.trim(),
-    logisticsCompany: form.elements.logisticsCompany.value.trim(),
-    refundCreatedAt: normalizeDate(form.elements.refundCreatedAt.value),
-    returnDate: normalizeDate(form.elements.returnDate.value),
-    productId: product.id,
-    productName: product.name,
-    quantity,
-    operator: form.elements.operator.value.trim() || operator,
-    note: form.elements.note.value.trim(),
-    createdAt: previous?.createdAt || today(),
-  });
-  if (editingReturnId) state.returns = state.returns.map((item) => item.id === editingReturnId ? record : item); else state.returns.unshift(record);
-  editingReturnId = null;
-  document.getElementById("returnDialog").close();
   render();
 });
 
@@ -1183,78 +662,37 @@ document.body.addEventListener("click", (event) => {
   const editProduct = target.dataset.editProduct;
   const deleteProduct = target.dataset.deleteProduct;
   const adjust = target.dataset.adjust;
-  const detail = target.dataset.detail;
-  const costProduct = target.dataset.costProduct;
-  const editReturn = target.dataset.editReturn;
-  const editIn = target.dataset.editIn;
-  const editProfit = target.dataset.editProfit;
-  const profitProduct = target.dataset.profitProduct;
   if (editProduct) openProductDialog(byId(editProduct));
   if (adjust) openMovementDialog("in", adjust);
-  if (detail) showProductDetail(detail);
-  if (costProduct) openCostDialogForProduct(costProduct);
-  if (editReturn) openReturnDialog(state.returns.find((item) => item.id === editReturn));
-  if (editIn) openMovementDialog("in", "", state.stockIns.find((item) => item.id === editIn));
-  if (editProfit) openProfitAdjustDialog(state.profitAdjustments.find((item) => item.id === editProfit));
-  if (profitProduct) openProfitAdjustDialog(null, profitProduct);
-  if (target.id === "adjustChannelBtn") { document.getElementById("channelForm").reset(); document.getElementById("channelDialog").showModal(); }
   if (deleteProduct && confirm("确定删除该商品吗？")) { state.products = state.products.filter((item) => item.id !== deleteProduct); render(); }
-  if (target.dataset.deleteIn) { const item = state.stockIns.find((record) => record.id === target.dataset.deleteIn); const product = item && byId(item.productId); if (product) product.stock = Math.max(0, product.stock - item.quantity); state.stockIns = state.stockIns.filter((item) => item.id !== target.dataset.deleteIn); render(); }
+  if (target.dataset.deleteIn) { state.stockIns = state.stockIns.filter((item) => item.id !== target.dataset.deleteIn); render(); }
   if (target.dataset.deleteOut) { state.stockOuts = state.stockOuts.filter((item) => item.id !== target.dataset.deleteOut); render(); }
-  if (target.dataset.deleteReturn) { const item = state.returns.find((record) => record.id === target.dataset.deleteReturn); const product = item && byId(item.productId); if (product) product.stock = Math.max(0, product.stock - item.quantity); state.returns = state.returns.filter((record) => record.id !== target.dataset.deleteReturn); render(); }
   if (target.dataset.deleteCost) { state.costs = state.costs.filter((item) => item.id !== target.dataset.deleteCost); render(); }
-  if (target.dataset.deleteProfit) { state.profitAdjustments = state.profitAdjustments.filter((item) => item.id !== target.dataset.deleteProfit); render(); }
 });
 
 [
-  ["exportInventoryBtn", "库存查询", ["商品名称", "规格分类", "单位", "单价", "当前库存", "库存金额"], () => state.products.map((p) => [p.name, p.category, p.unit, p.price, p.stock, productAmount(p)])],
-  ["exportProductsBtn", "商品管理", ["商品名称", "规格分类", "单位", "单价", "当前库存", "预警库存"], () => state.products.map((p) => [p.name, p.category, p.unit, p.price, p.stock, p.warning])],
-  ["exportStockInBtn", "入库登记", ["商品", "供应商", "数量", "单价", "总金额", "日期", "操作员", "备注"], () => state.stockIns.map((i) => { const product = byId(i.productId); return [product?.name, i.supplier, i.quantity, stockInPrice(i), stockInPrice(i) * i.quantity, i.date, i.operator, i.purpose]; })],
+  ["exportInventoryBtn", "库存查询", ["商品名称", "分类", "单位", "单价", "当前库存", "库存金额"], () => state.products.map((p) => [p.name, p.category, p.unit, p.price, p.stock, productAmount(p)])],
+  ["exportProductsBtn", "商品管理", ["商品名称", "分类", "单位", "单价", "当前库存"], () => state.products.map((p) => [p.name, p.category, p.unit, p.price, p.stock])],
+  ["exportStockInBtn", "入库登记", ["批次号", "商品", "数量", "日期", "操作员"], () => state.stockIns.map((i) => [i.batch, byId(i.productId)?.name, i.quantity, i.date, i.operator])],
   ["exportStockOutBtn", "出库登记", ["商品", "数量", "日期", "用途"], () => state.stockOuts.map((i) => [byId(i.productId)?.name, i.quantity, i.date, i.purpose])],
-  ["exportReturnsBtn", "退货入库", ["退货日期", "退款创建时间", "订单号", "物流公司", "物流单号", "物品名称", "物品数量", "操作人", "备注", "登记时间"], () => state.returns.map((i) => [i.returnDate, i.refundCreatedAt, i.orderNo, i.logisticsCompany, i.trackingNo, byId(i.productId)?.name || i.productName, i.quantity, i.operator, i.note, i.createdAt])],
   ["exportCostsBtn", "成本登记", ["成本类型", "金额", "日期", "操作员", "说明"], () => state.costs.map((i) => [i.type, i.amount, i.date, i.operator, i.note])],
-  ["exportProfitsBtn", "利润计算", ["类型", "商品", "金额", "日期", "备注"], () => [["销售收入合计", "", totalRevenue(), today(), "自动出库+手动调整"], ["入库采购成本合计", "", totalPurchaseCost(), today(), "入库单价+手动调整"], ["费用成本合计", "", totalExpenseCost(), today(), "成本登记+手动调整"], ["预估利润", "", totalRevenue() - totalPurchaseCost() - totalExpenseCost(), today(), "收入-成本"], ...state.profitAdjustments.map((i) => [i.type, byId(i.productId)?.name || "", i.amount, i.date, i.note])]],
-].forEach(([id, filename, headers, rows]) => { const button = document.getElementById(id); if (button) button.addEventListener("click", () => exportCsv(filename, headers, rows())); });
+  ["exportReportsBtn", "报表统计", ["指标", "数值"], () => [["总入库量", state.stockIns.reduce((s, i) => s + i.quantity, 0)], ["总出库量", state.stockOuts.reduce((s, i) => s + i.quantity, 0)], ["总成本", sumCost("采购成本") + sumCost("快递成本") + sumCost("代发成本") + sumCost("其他成本")]]],
+].forEach(([id, filename, headers, rows]) => document.getElementById(id).addEventListener("click", () => exportCsv(filename, headers, rows())));
 
-["importStockInBtn", "importStockOutBtn", "importReturnsBtn"].forEach((id) => document.getElementById(id).addEventListener("click", () => { pendingImportType = id === "importStockInBtn" ? "in" : id === "importStockOutBtn" ? "out" : "returns"; document.getElementById("csvFileInput").click(); }));
+["importStockInBtn", "importStockOutBtn"].forEach((id) => document.getElementById(id).addEventListener("click", () => { pendingImportType = id === "importStockInBtn" ? "in" : "out"; document.getElementById("csvFileInput").click(); }));
 document.getElementById("csvFileInput").addEventListener("change", async (event) => {
   const [file] = event.target.files;
   if (!file) return;
-  try {
-    const rows = (await parseImportFile(file)).slice(1);
-    rows.forEach((row) => {
-      if (pendingImportType === "products") {
-        const [name, category = "未分类", unit = "只", price = 0, stock = 0, warning = LOW_STOCK_DEFAULT] = row;
-        if (!name) return;
-        const categoryName = String(category || "").trim();
-        if (!categoryList().includes(categoryName)) return;
-        const existing = state.products.find((item) => item.name === name && item.category === categoryName);
-        const product = { id: existing?.id || uid("p"), code: existing?.code || `SP${String(state.products.length + 1).padStart(3, "0")}`, name: name.trim(), category: categoryName, unit: unit.trim() || "只", price: Number(price || 0), stock: Number.parseInt(stock || 0, 10), warning: Number.parseInt(warning || LOW_STOCK_DEFAULT, 10), enabled: true };
-        if (existing) state.products = state.products.map((item) => item.id === existing.id ? product : item); else state.products.push(product);
-        return;
-      }
-      if (pendingImportType === "returns") {
-        const [orderNo, trackingNo, logisticsCompany, productName, quantity, rowOperator = operator, note = "", returnDate = today(), refundCreatedAt = returnDate] = row;
-        const product = findProductByName(productName);
-        const qty = Number.parseInt(quantity, 10);
-        if (!orderNo || !product || !qty) return;
-        product.stock += qty;
-        state.returns.unshift(normalizeReturnRecord({ id: uid("ret"), orderNo, trackingNo, logisticsCompany, productId: product.id, productName: product.name, quantity: qty, operator: rowOperator || operator, note, returnDate: normalizeDate(returnDate), refundCreatedAt: normalizeDate(refundCreatedAt || returnDate), createdAt: today() }));
-        return;
-      }
-      const [productName, quantity, date, extra = "", remark = "", importPrice = ""] = row;
-      const product = findProductByName(productName);
-      const qty = Number.parseInt(quantity, 10);
-      if (!product || !qty) return;
-      if (pendingImportType === "in") { product.stock += qty; state.stockIns.unshift({ id: uid("in"), productId: product.id, batch: "000", supplier: extra || "-", price: Number(importPrice || product.price || 0), quantity: qty, date: normalizeDate(date), operator, purpose: remark || "批量导入" }); }
-      if (pendingImportType === "out" && product.stock >= qty) { product.stock -= qty; state.stockOuts.unshift({ id: uid("out"), productId: product.id, quantity: qty, date: normalizeDate(date), operator, purpose: extra || "批量导入" }); }
-    });
-    render();
-  } catch (error) {
-    alert(error.message || "导入失败，请检查文件格式。");
-  } finally {
-    event.target.value = "";
-  }
+  const rows = parseCsv(await file.text()).slice(1);
+  rows.forEach(([productName, quantity, date]) => {
+    const product = state.products.find((item) => item.name === productName);
+    const qty = Number.parseInt(quantity, 10);
+    if (!product || !qty) return;
+    if (pendingImportType === "in") { product.stock += qty; state.stockIns.unshift({ id: uid("in"), productId: product.id, batch: "000", supplier: "-", quantity: qty, date: date || today(), operator }); }
+    if (pendingImportType === "out" && product.stock >= qty) { product.stock -= qty; state.stockOuts.unshift({ id: uid("out"), productId: product.id, quantity: qty, date: date || today(), operator, purpose: "批量导入" }); }
+  });
+  event.target.value = "";
+  render();
 });
 
 render();
