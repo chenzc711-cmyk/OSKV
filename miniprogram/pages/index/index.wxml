@@ -1,22 +1,16 @@
 <view class="page">
-  <view class="mini-header">
-    <view class="brand-mark">拾</view>
-    <view class="brand-copy">
-      <text class="brand-title">拾纷电商仓库</text>
-      <text class="brand-subtitle">汽车用品移动管理端</text>
+  <view class="hero">
+    <view>
+      <text class="kicker">MINI WAREHOUSE</text>
+      <text class="title">拾纷电商仓库</text>
+      <text class="subtitle">微信小程序端 · 手机录入库存、利润和渠道款项</text>
     </view>
   </view>
 
-  <view class="hero-card">
-    <view class="hero-copy">
-      <text class="kicker">{{currentView.key}}</text>
-      <text class="title">{{currentView.title}}</text>
-      <text class="subtitle">{{currentView.desc}}</text>
-    </view>
-    <view class="hero-orb">{{currentView.icon}}</view>
-  </view>
+  <scroll-view class="nav" scroll-x enhanced show-scrollbar="false">
+    <button wx:for="{{views}}" wx:key="key" class="nav-btn {{activeView === item.key ? 'active' : ''}}" data-view="{{item.key}}" bindtap="switchView">{{item.name}}</button>
+  </scroll-view>
 
-  <view class="content">
   <view wx:if="{{activeView === 'dashboard'}}">
     <view class="grid two">
       <view class="card metric"><text>商品总数</text><strong>{{metrics.productCount}}</strong></view>
@@ -126,13 +120,5 @@
       <view><strong>{{item.name}}</strong><text>出库 {{item.outQty}} · 退货 {{item.returnQty}}</text></view>
       <view class="right"><strong>{{item.grossText}}</strong><text>{{item.revenueText}} / {{item.purchaseText}}</text></view>
     </view>
-  </view>
-  </view>
-
-  <view class="bottom-tabs">
-    <button wx:for="{{views}}" wx:key="key" class="tab-item {{activeView === item.key ? 'active' : ''}}" data-view="{{item.key}}" bindtap="switchView">
-      <text class="tab-icon">{{item.icon}}</text>
-      <text class="tab-label">{{item.name}}</text>
-    </button>
   </view>
 </view>

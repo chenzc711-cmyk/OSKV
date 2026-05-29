@@ -10,14 +10,14 @@ const profitTypes = [
   { key: "expense", name: "费用成本调整" }
 ];
 const views = [
-  { key: "dashboard", name: "总览", icon: "⌂", title: "仓储总览", desc: "库存、渠道款项与风险提醒" },
-  { key: "inventory", name: "库存", icon: "◎", title: "库存查询", desc: "查看商品库存、单价和安全线" },
-  { key: "stockIn", name: "入库", icon: "↙", title: "入库登记", desc: "采购补货、供应商、单价和备注" },
-  { key: "stockOut", name: "出库", icon: "↗", title: "出库登记", desc: "销售发货、用途和库存扣减" },
-  { key: "returns", name: "退货", icon: "↩", title: "退货入库", desc: "退货订单、物流和补回库存" },
-  { key: "costs", name: "成本", icon: "¥", title: "成本登记", desc: "采购、快递、代发和其他成本" },
-  { key: "products", name: "商品", icon: "□", title: "商品管理", desc: "维护商品档案、分类和预警库存" },
-  { key: "profits", name: "利润", icon: "▣", title: "利润计算", desc: "收入、成本、退款与利润调整" }
+  { key: "dashboard", name: "仪表盘" },
+  { key: "inventory", name: "库存" },
+  { key: "stockIn", name: "入库" },
+  { key: "stockOut", name: "出库" },
+  { key: "returns", name: "退货" },
+  { key: "costs", name: "成本" },
+  { key: "products", name: "商品" },
+  { key: "profits", name: "利润" }
 ];
 
 function uid(prefix) {
@@ -51,7 +51,6 @@ Page({
   data: {
     views,
     activeView: "dashboard",
-    currentView: views[0],
     channels,
     profitTypes,
     channelNames: channels.map((item) => item.name),
@@ -126,11 +125,7 @@ Page({
     return (this.data.state.profitAdjustments || []).filter((item) => item.type === type && (!productId || item.productId === productId)).reduce((sum, item) => sum + Number(item.amount || 0), 0);
   },
   switchView(event) {
-    const view = event.currentTarget.dataset.view;
-    this.setData({
-      activeView: view,
-      currentView: views.find((item) => item.key === view) || views[0]
-    });
+    this.setData({ activeView: event.currentTarget.dataset.view });
   },
   updateForm(event) {
     const { form, field } = event.currentTarget.dataset;
@@ -176,7 +171,7 @@ Page({
   editStockIn(event) {
     const record = this.data.state.stockIns.find((item) => item.id === event.currentTarget.dataset.id);
     const productIndex = this.data.state.products.findIndex((item) => item.id === record.productId);
-    this.setData({ stockInForm: { productIndex, supplier: record.supplier, price: record.price, quantity: record.quantity, date: record.date, note: record.note, editingId: record.id }, activeView: "stockIn", currentView: views.find((item) => item.key === "stockIn") || views[0] });
+    this.setData({ stockInForm: { productIndex, supplier: record.supplier, price: record.price, quantity: record.quantity, date: record.date, note: record.note, editingId: record.id }, activeView: "stockIn" });
   },
   addStockOut() {
     const form = this.data.stockOutForm;
